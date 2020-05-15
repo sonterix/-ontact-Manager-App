@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
-import { isLogged } from 'constants.js'
 import { NavLink } from 'react-router-dom'
 
 const handleGetLink = (path, name) => {
@@ -34,7 +33,7 @@ const handleGetLink = (path, name) => {
   }
 }
 
-const HeaderLink = ({ path, name, privat }) => {
+const HeaderLink = ({ path, name, privat, isLogged }) => {
   const navLink = handleGetLink(path, name)
   
   return (
@@ -50,13 +49,15 @@ const HeaderLink = ({ path, name, privat }) => {
 HeaderLink.propTypes = {
   path: PropTypes.string,
   name: PropTypes.string,
-  privat: PropTypes.bool
+  privat: PropTypes.bool,
+  isLogged: PropTypes.bool
 }
 
 HeaderLink.defaultProps = {
   path: '/',
   name: 'Home',
-  privat: false
+  privat: false,
+  isLogged: false
 }
 
 export default HeaderLink

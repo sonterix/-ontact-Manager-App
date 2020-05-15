@@ -1,6 +1,6 @@
 import React from 'react'
-import { NAV_ITEMS } from 'constants.js'
-import HeaderLink from './HeaderLink/HeaderLink'
+import { NAV_ITEMS } from 'helpers.js'
+import HeaderLink from '../../containers/HeaderLink/HeaderLinkContainer'
 import Logo from 'components/Logo/Logo'
 import styles from './Header.module.scss'
 

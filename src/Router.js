@@ -1,18 +1,39 @@
 import React, { lazy, Suspense } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import App from 'App'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import App from 'containers/App/AppContainer'
 
 const Home = lazy(() => import('components/Home/Home'))
+const Login = lazy(() => import('containers/Login/LoginContainer'))
+
+const PrivateRoute = ({ component: Component, ...props }) => {
+  const isLogged = useSelector(({ login: { isLogged } }) => isLogged)
+  return (
+    <Route { ...props } render={({ location }) =>
+        isLogged
+        ? <Component { ...props } />
+        : <Redirect to={{
+              pathname: '/login',
+              state: { from: location }
+            }}
+          />
+      }
+    />
+  )
+}
 
 const Router = () => (
   <BrowserRouter>
-    <Suspense fallback="Loading..">
-      <App>
+    <App>
+      <Suspense fallback="Loading..">
         <Switch>
           <Route path="/" component={ Home } exact />
+          <Route path="/login" component={ Login } />
+          <PrivateRoute path="/contacts" component={ () => <h1>Contacts</h1>  }/>
+          <PrivateRoute path="/contact-details/:userId" component={ () => <h1>Contact Details</h1> } />
         </Switch>
-      </App>
-    </Suspense>
+      </Suspense>
+    </App>
   </BrowserRouter>
 )
 
