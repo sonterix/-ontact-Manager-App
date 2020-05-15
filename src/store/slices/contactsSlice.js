@@ -18,12 +18,10 @@ const contactsSlice = createSlice({
       state.activePage = activePage
     },
     toggleFavorite: (state, { payload }) => {
-      state.users = state.users.map(user => {
-        if (user.id === payload) {
-          user.favorite = !user.favorite
-        }
-        return user
-      })
+      state.users = state.users.map(user => user.id === payload ? { ...user, favorite: !user.favorite } : user)
+    },
+    deleteUser: (state, { payload }) => {
+      state.users = state.users.filter(user => user.id !== payload)
     }
   }
 })
@@ -31,7 +29,8 @@ const contactsSlice = createSlice({
 export const {
   setUsers: setUsersAction,
   switchPage: switchPageActio,
-  toggleFavorite: toggleFavoriteAction
+  toggleFavorite: toggleFavoriteAction,
+  deleteUser: deleteUserAction
 } = contactsSlice.actions
 
 export default contactsSlice

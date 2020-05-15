@@ -18,16 +18,19 @@ const Contacts = ({ setUsers, users, activePage, totalPages }) => {
   return (
     <div className={ `wrapper-sm ${ styles.UsersWrapper }` }>
       <ul className={ styles.Users }>
-        <li className={ styles.Placeholder }>
-          <div className={ styles.FavoritePlaceholder }>Fav</div>
-          <div className={ styles.NamePlaceholder }>Name</div>
-          <div className={ styles.SelectPlaceholder }>Select</div>
-          <div className={ styles.DetailsPlaceholder }>Details</div>
-          <div className={ styles.DeletePlaceholder }>Delete</div>
-        </li>
-        { users.length 
-        ? users.map(user => <User key={ user.id } user={ user } />)
-        : <li className={ styles.NotFound }>Users Not Found</li>
+        { users.length
+          ? <>
+              <li className={ styles.Placeholder }>
+                <div className={ styles.FavoritePlaceholder }>Fav</div>
+                <div className={ styles.NamePlaceholder }>Name</div>
+                <div className={ styles.SelectPlaceholder }>Select</div>
+                <div className={ styles.DetailsPlaceholder }>Details</div>
+                <div className={ styles.DeletePlaceholder }>Delete</div>
+              </li>
+
+            { users.map(user => <User key={ user.id } user={ user } />) }
+            </>
+          : <li className={ styles.NotFound }>Users Not Found</li>
         }
       </ul>
     </div>

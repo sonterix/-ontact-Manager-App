@@ -5,7 +5,7 @@ import { faStar as solidStar, faInfoCircle, faTrash } from '@fortawesome/free-so
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons'
 import styles from './User.module.scss'
 
-const User = ({ user: { id, first_name, last_name, favorite }, toggleFavorite }) => {
+const User = ({ user: { id, first_name, last_name, favorite }, toggleFavorite, deleteUser }) => {
   return (
     <li className={ styles.User }>
       <div className={ styles.Favorite }>
@@ -25,7 +25,7 @@ const User = ({ user: { id, first_name, last_name, favorite }, toggleFavorite })
         </button>
       </div>
       <div className={ styles.Delete }>
-        <button>
+        <button onClick={ () => deleteUser(id) }>
           <FontAwesomeIcon icon={ faTrash } />
         </button>
       </div>
@@ -40,7 +40,8 @@ User.propTypes = {
     last_name: PropTypes.string,
     favorite: PropTypes.bool
   }),
-  toggleFavorite: PropTypes.func
+  toggleFavorite: PropTypes.func,
+  deleteUser: PropTypes.func
 }
 
 User.defaultProps = {
@@ -50,7 +51,8 @@ User.defaultProps = {
     last_name: '',
     favorite: false
   },
-  toggleFavorite: () => {}
+  toggleFavorite: () => {},
+  deleteUser: () => {}
 }
 
 export default User
