@@ -9,7 +9,7 @@ const Contacts = ({ setUsers, users, activePage, totalPages }) => {
     if (!users.length) {
       (async () => {
         const { data, total_pages } = await getUsers()
-        const users = data.map(user => ({ ...user, favorite: false }))
+        const users = data.map(user => ({ ...user, favorite: false, checked: false }))
         setUsers({ users, total_pages })
       })()
     }
@@ -33,6 +33,10 @@ const Contacts = ({ setUsers, users, activePage, totalPages }) => {
           : <li className={ styles.NotFound }>Users Not Found</li>
         }
       </ul>
+
+      <div className={ styles.Actions }>
+        <button className={ styles.DeleteSelected }>Delete Selected</button>
+      </div>
     </div>
   )
 }

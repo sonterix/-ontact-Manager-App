@@ -20,6 +20,9 @@ const contactsSlice = createSlice({
     toggleFavorite: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload ? { ...user, favorite: !user.favorite } : user)
     },
+    toggleCheck: (state, { payload }) => {
+      state.users = state.users.map(user => user.id === payload ? { ...user, checked: !user.checked } : user)
+    },
     deleteUser: (state, { payload }) => {
       state.users = state.users.filter(user => user.id !== payload)
     }
@@ -30,6 +33,7 @@ export const {
   setUsers: setUsersAction,
   switchPage: switchPageActio,
   toggleFavorite: toggleFavoriteAction,
+  toggleCheck: toggleCheckAction,
   deleteUser: deleteUserAction
 } = contactsSlice.actions
 

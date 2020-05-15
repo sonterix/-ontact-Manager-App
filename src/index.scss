@@ -18,11 +18,11 @@ body {
 
   a {
     text-decoration: none;
-    transition: $trans-md;
+    transition: all $trans-md;
   }
   
   button {
-    transition: $trans-md;
+    transition: all $trans-md;
     cursor: pointer;
   }
   

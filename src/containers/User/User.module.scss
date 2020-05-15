@@ -18,16 +18,35 @@
 
       > svg {
         color: $color-orange;
+        transition: color $trans-md;
       }
     }
   }
 
-  .Details > button > svg {
-    color: $color-blue;
+  .Details > button {
+
+    > svg {
+      color: $color-blue;
+    }
+
+    &:hover > svg {
+      color: darken($color-blue, 15);
+    }
   }
 
-  .Delete > button > svg {
-    color: $color-red;
+  .Delete > button {
+
+    > svg {
+      color: $color-red;
+    }
+
+    &:hover > svg {
+      color: darken($color-red, 15);
+    }
+  }
+
+  .Select > button > svg {
+    color: $color-dark;
   }
 
   .Name {  
