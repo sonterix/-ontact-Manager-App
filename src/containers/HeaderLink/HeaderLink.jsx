@@ -4,25 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserAlt, faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'
 
-const handleGetLink = (path, name) => {
-  switch (name) {
-    case 'Login':
-      return (
-        <NavLink to={ path } exact>
-          <div className="user">
-            <FontAwesomeIcon icon={ faUserAlt } />
-          </div>
-        </NavLink>
-      )
-
-    case 'Logout':
-      return (
-        <NavLink to={ path } exact>
-          <div className="user">
-            <FontAwesomeIcon icon={ faUserAltSlash } />
-          </div>
-        </NavLink>
-      )
+const handleGetLink = (path, name, isLogged) => {
+  switch (typeof name) {
+    case 'object':
+      if (isLogged) {
+        return (
+          <NavLink to={ path[1] } exact>
+            <div className="user">
+              <FontAwesomeIcon icon={ faUserAltSlash } />
+            </div>
+          </NavLink>
+        )
+      } else {
+        return (
+          <NavLink to={ path[0] } exact>
+            <div className="user">
+              <FontAwesomeIcon icon={ faUserAlt } />
+            </div>
+          </NavLink>
+        )
+      }
   
     default:
       return (
@@ -34,7 +35,7 @@ const handleGetLink = (path, name) => {
 }
 
 const HeaderLink = ({ path, name, privat, isLogged }) => {
-  const navLink = handleGetLink(path, name)
+  const navLink = handleGetLink(path, name, isLogged)
   
   return (
     <>
@@ -47,8 +48,8 @@ const HeaderLink = ({ path, name, privat, isLogged }) => {
 }
 
 HeaderLink.propTypes = {
-  path: PropTypes.string,
-  name: PropTypes.string,
+  path:PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   privat: PropTypes.bool,
   isLogged: PropTypes.bool
 }

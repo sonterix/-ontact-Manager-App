@@ -5,6 +5,7 @@ import App from 'containers/App/AppContainer'
 
 const Home = lazy(() => import('components/Home/Home'))
 const Login = lazy(() => import('containers/Login/LoginContainer'))
+const Logout = lazy(() => import('containers/Logout/LogoutContainer'))
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const isLogged = useSelector(({ login: { isLogged } }) => isLogged)
@@ -29,6 +30,7 @@ const Router = () => (
         <Switch>
           <Route path="/" component={ Home } exact />
           <Route path="/login" component={ Login } />
+          <Route path="/logout" component={ Logout } />
           <PrivateRoute path="/contacts" component={ () => <h1>Contacts</h1>  }/>
           <PrivateRoute path="/contact-details/:userId" component={ () => <h1>Contact Details</h1> } />
         </Switch>
