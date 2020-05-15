@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import App from 'containers/App/AppContainer'
+import Loading from 'components/Loading/Loading'
 
 const Home = lazy(() => import('components/Home/Home'))
 const Login = lazy(() => import('containers/Login/LoginContainer'))
@@ -26,7 +27,7 @@ const PrivateRoute = ({ component: Component, ...props }) => {
 const Router = () => (
   <BrowserRouter>
     <App>
-      <Suspense fallback="Loading..">
+      <Suspense fallback={ <Loading /> }>
         <Switch>
           <Route path="/" component={ Home } exact />
           <Route path="/login" component={ Login } />

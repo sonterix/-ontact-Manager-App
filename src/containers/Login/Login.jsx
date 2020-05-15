@@ -1,34 +1,47 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { auth } from 'helpers.js'
+import { auth, checkForEmptyInputs } from 'helpers.js'
 import { useHistory, Redirect } from 'react-router-dom'
 import styles from './Login.module.scss'
 
-const Login = ({ isLogged, loginUser }) => {
+const Login = ({ isLogged, loginUser, loadingOn, loadingOff, setAlert, unsetAlert }) => {
   const initialFormData = { email: '', password: '' }
 
   const [ formData, setFormData ] = useState(initialFormData)
   const { email, password } = formData
 
+  const emailInput = useRef()
+  const passwordInput = useRef()
+
   const { location, push } = useHistory()
 
-  const emailInput = useRef();
-
-  const handleInputData = ({ target: { name, value } }) => setFormData({
-    ...formData,
-    [name]: value
-  }) 
+  const handleInputData = ({ target: { name, value } }) => setFormData({ ...formData, [name]: value }) 
 
   const handleSubmitForm = async event => {
     event.preventDefault()
-    setFormData({ ...formData, ...initialFormData})
+    // just base validation to not spend so much time
+    const inputErrors = checkForEmptyInputs([ emailInput.current, passwordInput.current ])
 
-    const { token, error } = await auth(formData)
-    
-    if (token) {
-      const { from } = location.state || { from: { pathname: '/' } }
-      loginUser(email, token)
-      push(from)
+    if (!inputErrors) {
+      loadingOn()
+
+      const { token, error } = await auth(formData)
+      setFormData({ ...formData, ...initialFormData})
+      
+      if (error) {
+        loadingOff()
+        setAlert(error)
+
+        setTimeout(() => {
+          unsetAlert()
+        }, 4000)
+      } else if (token) {
+        loginUser(email, token)
+        loadingOff()
+
+        const { from } = location.state || { from: { pathname: '/' } }
+        push(from)
+      }
     }
   }
 
@@ -41,7 +54,8 @@ const Login = ({ isLogged, loginUser }) => {
       { isLogged 
       ? <Redirect to="/contacts" />
       : (
-          <div className="wrapper">
+          <div className={ `wrapper ${ styles.LoginFormWrapper }` }>
+            <h1 className={ styles.LoginFormTitle }>Login</h1>
             <form className={ styles.LoginForm } onSubmit={ event => handleSubmitForm(event) }>
               <input
                 type="email"
@@ -56,6 +70,7 @@ const Login = ({ isLogged, loginUser }) => {
                 type="password"
                 name="password"
                 placeholder="Your Password"
+                ref={ passwordInput }
                 value={ password }
                 onChange={ event => handleInputData(event) }
               />
@@ -71,12 +86,20 @@ const Login = ({ isLogged, loginUser }) => {
 
 Login.propTypes = {
   isLogged: PropTypes.bool,
-  loginUser: PropTypes.func
+  loginUser: PropTypes.func,
+  loadingOn: PropTypes.func,
+  loadingOff: PropTypes.func,
+  setAlert: PropTypes.func,
+  unsetAlert: PropTypes.func
 }
 
 Login.defaultProps = {
   isLogged: false,
-  loginUser: () => {}
+  loginUser: () => {},
+  loadingOn: () => {},
+  loadingOff: () => {},
+  setAlert: () => {},
+  unsetAlert: () => {}
 }
 
 export default Login

@@ -1,3 +1,55 @@
+@import '../../assets/sass/variables';
+
+.LoginFormWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.LoginFormTitle {
+  margin: 15px;
+  font-size: 52px;
+  color: $color-orange;
+}
+
 .LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
+  > input {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    min-width: 250px;
+    font-size: 16px;
+    border: 1px solid darken($color-lightgrey, 25);
+    transition: border-color $trans-md;
+
+    &:global(.error) {
+      border-color: $color-red;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: $color-orange;
+    }
+  }
+
+  > button {
+    max-width: 150px;
+    width: 100%;
+    padding: 10px;
+    color: $color-white;
+    background-color: $color-dark;
+    border: none;
+    font-size: 16px;
+    transition: background-color $trans-md;
+
+    &:hover,
+    &:focus {
+      background-color: $color-orange;
+    }
+  }
 }

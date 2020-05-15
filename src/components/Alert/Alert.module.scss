@@ -1,0 +1,20 @@
+@import '../../assets/sass/variables';
+@import '../../assets/sass/animation';
+
+.AlertWrapper { 
+  position: fixed;
+  top: 55px;
+  right: 0;
+  margin: 25px 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  color: $color-white;
+  background-color: $color-blue;
+  transform: translateX(100%);
+  animation: slideleft 0.3s forwards;
+  cursor: default;
+  z-index: 100;
+}

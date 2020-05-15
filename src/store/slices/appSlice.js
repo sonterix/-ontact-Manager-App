@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   loading: false,
-  aletr: {
+  alert: {
     status: false,
     message: ''
   }
@@ -12,16 +12,26 @@ const appSlice = createSlice({
   name: 'app',
   initialState: initialState,
   reducers: { 
-    loadingOn: state => state.loading = true,
-    loadingOff: state => state.loading = false,
-    setAletr: (state, payload) => state.aletr = { status: true, message: payload },
-    unsetAletr: state => state.aletr = { status: false, message: '' }
+    loadingOn: state => {
+      state.loading = true
+    },
+    loadingOff: state => {
+      state.loading = false
+    },
+    setAlert: (state, payload) => {
+      state.alert = { status: true, message: payload.payload } 
+    },
+    unsetAlert: state => {
+      state.alert = { status: false, message: '' }
+    }
   }
 })
 
 export const {
   loadingOn: loadingOnAction,
   loadingOff: loadingOffAction,
-  setAletr: setAletrAction,
-  unsetAletr: unsetAletrAction
+  setAlert: setAlertAction,
+  unsetAlert: unsetAlertAction
 } = appSlice.actions
+
+export default appSlice

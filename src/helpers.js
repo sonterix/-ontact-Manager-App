@@ -44,3 +44,19 @@ export const NAV_ITEMS = {
     { id: 2, path: '/login', name: 'Login' }
   ]
 }
+
+// Checks (works with ref)
+export const checkForEmptyInputs = inputs => {
+  let error = false
+
+  inputs.forEach(element => {
+    if (element.value.length < 3) {
+      error = true
+      element.classList.add('error')
+    } else {
+      element.classList.remove('error')
+    }
+  })
+
+  return error
+}
