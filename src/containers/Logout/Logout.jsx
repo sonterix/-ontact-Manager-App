@@ -6,7 +6,7 @@ import { setLogoutLS } from 'helpers'
 const Logout = ({ logoutUser }) => {
   setLogoutLS()
   logoutUser()
-  return <Redirect to="/" />
+  return <Redirect to="/login" />
 }
 
 Logout.propTypes = {

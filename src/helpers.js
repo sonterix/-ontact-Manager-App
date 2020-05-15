@@ -33,8 +33,14 @@ export const setLogoutLS = () => {
 }
 
 // Nav
-export const NAV_ITEMS = [
-  { id: 1, path: '/', name: 'Home', privat: false },
-  { id: 2, path: '/contacts', name: 'Contacts', privat: true },
-  { id: 3, path: ['/login','/logout'], name: ['Login', 'Logout'], privat: false },
-]
+export const NAV_ITEMS = {
+  userLogin: [
+    { id: 1, path: '/', name: 'Home' },
+    { id: 2, path: '/contacts', name: 'Contacts' },
+    { id: 3, path: '/logout', name: 'Logout' }
+  ],
+  userLogout: [
+    { id: 1, path: '/', name: 'Home' },
+    { id: 2, path: '/login', name: 'Login' }
+  ]
+}

@@ -10,7 +10,7 @@ const Login = ({ isLogged, loginUser }) => {
   const [ formData, setFormData ] = useState(initialFormData)
   const { email, password } = formData
 
-  const { location, go } = useHistory()
+  const { location, push } = useHistory()
 
   const emailInput = useRef();
 
@@ -21,14 +21,15 @@ const Login = ({ isLogged, loginUser }) => {
 
   const handleSubmitForm = async event => {
     event.preventDefault()
+    setFormData({ ...formData, ...initialFormData})
+
     const { token, error } = await auth(formData)
     
     if (token) {
       const { from } = location.state || { from: { pathname: '/' } }
-      go(from)
+      loginUser(email, token)
+      push(from)
     }
-
-    setFormData({ ...formData, ...initialFormData})
   }
 
   useEffect(() => {

@@ -1,11 +1,11 @@
 import React from 'react'
-import HeaderLink from './HeaderLink'
+import Header from './Header'
 import { useSelector } from 'react-redux'
 
-const HeaderLinkContainer = props => {
+const HeaderContainer = props => {
   const isLogged = useSelector(({ login: { isLogged } }) => isLogged)
   const updatedProps = { ...props, isLogged }
-  return <HeaderLink { ...updatedProps } />
+  return <Header { ...updatedProps } />
 }
 
-export default HeaderLinkContainer
+export default HeaderContainer

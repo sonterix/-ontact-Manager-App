@@ -5,8 +5,8 @@ import Logout from './Logout'
 
 const LogoutContainer = props => {
   const dispatch = useDispatch()
-  const logoutUser = dispatch(logoutUserAction())
-  const updatedProps = { ...logoutUser, ...props }
+  const logoutUser = () => dispatch(logoutUserAction())
+  const updatedProps = { logoutUser, ...props }
   return <Logout { ...updatedProps } />
 }
 

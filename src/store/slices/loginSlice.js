@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loadingOnAction, loadingOffAction } from "./appSlice";
 
 const initialState = {
   user: '',
@@ -25,6 +26,7 @@ export const {
 } = loginSlice.actions
 
 export const checkUser = (user, token) => async dispatch => {
+  dispatch(loadingOnAction())
   const response = await new Promise((resolve) => {
     setTimeout(() => {
       if (token) {
@@ -42,6 +44,8 @@ export const checkUser = (user, token) => async dispatch => {
   } else {
     dispatch(logoutUserAction())
   }
+
+  dispatch(loadingOffAction())
 }
 
 export default loginSlice

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Header from 'components/Header/Header'
+import Header from 'containers/Header/HeaderContainer'
 
 const App = ({ children, checkUser }) => {
   useEffect(() => {
