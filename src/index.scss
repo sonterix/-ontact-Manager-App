@@ -8,18 +8,37 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
+body {
+  background-color: $color-lightgrey;
+  min-height: 100vh;
 
-  &:focus {
-    outline: none;
+  a {
+    text-decoration: none;
+    transition: $trans-md;
+  
+    &:focus {
+      outline: none;
+    }
   }
-}
+  
+  button {
+    transition: $trans-md;
+    cursor: pointer;
+  
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  .wrapper {
+    max-width: 1330px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
 
-button {
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
+  .logo {
+    display: inline-block;
+    line-height: 0;
   }
 }
