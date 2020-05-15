@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-const Home = lazy(() => import('App'))
+const Home = lazy(() => import('components/Home/Home'))
 
 const Router = () => (
   <BrowserRouter>
