@@ -66,6 +66,10 @@
       &:hover {
         background-color: darken($color-red, 15);
       }
+
+      &:disabled {
+        background-color: darken($color-lightgrey, 30);
+      }
     }
 
     > button {
@@ -78,6 +82,10 @@
 
       &:last-child {
         margin-left: 0;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
       }
     }
   }

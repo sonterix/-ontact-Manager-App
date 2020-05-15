@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   users: [],
+  buttons: {
+    deleteSelectedButton: false
+  },
   activePage: 1,
   totalPages: 1
 }
@@ -22,9 +25,13 @@ const contactsSlice = createSlice({
     },
     toggleCheck: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload ? { ...user, checked: !user.checked } : user)
+      state.buttons.deleteSelectedButton = state.users.some(user => user.checked)
     },
     deleteUser: (state, { payload }) => {
       state.users = state.users.filter(user => user.id !== payload)
+    },
+    deleteSelected: state => {
+      state.users = state.users.filter(user => user.checked === false)
     }
   }
 })
@@ -34,7 +41,8 @@ export const {
   switchPage: switchPageActio,
   toggleFavorite: toggleFavoriteAction,
   toggleCheck: toggleCheckAction,
-  deleteUser: deleteUserAction
+  deleteUser: deleteUserAction,
+  deleteSelected: deleteSelectedAction
 } = contactsSlice.actions
 
 export default contactsSlice

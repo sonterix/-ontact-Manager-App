@@ -4,7 +4,7 @@ import { getUsers } from 'helpers.js'
 import User from 'containers/User/UserContainer'
 import styles from './Contacts.module.scss'
 
-const Contacts = ({ setUsers, users, activePage, totalPages }) => {
+const Contacts = ({ setUsers, users, activePage, totalPages, deleteSelected, deleteSelectedButton }) => {
   useEffect(() => {
     if (!users.length) {
       (async () => {
@@ -35,18 +35,24 @@ const Contacts = ({ setUsers, users, activePage, totalPages }) => {
       </ul>
 
       <div className={ styles.Actions }>
-        <button className={ styles.DeleteSelected }>Delete Selected</button>
+        <button className={ styles.DeleteSelected } onClick={ () => deleteSelected() } disabled={ !deleteSelectedButton }>
+          Delete Selected
+        </button>
       </div>
     </div>
   )
 }
 
 Contacts.propTypes = {
-  updatedProps: PropTypes.func
+  updatedProps: PropTypes.func,
+  deleteSelected: PropTypes.func,
+  deleteSelectedButton: PropTypes.bool
 }
 
 Contacts.defaultProps = {
-  updatedProps: () => {}
+  updatedProps: () => {},
+  deleteSelected: () => {},
+  deleteSelectedButton: false
 }
 
 export default Contacts
