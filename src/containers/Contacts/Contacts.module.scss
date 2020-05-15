@@ -1,0 +1,51 @@
+@import '../../assets/sass/variables';
+
+.UsersWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+
+  .Users {
+    width: 100%;
+    list-style: none;
+    
+    .Placeholder {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .FavoritePlaceholder,
+      .DetailsPlaceholder,
+      .SelectPlaceholder,
+      .DeletePlaceholder {
+        flex: 1
+      }
+  
+      .NamePlaceholder {  
+        flex: 8;
+      }
+  
+      > div {
+        margin-top: 25px;
+        padding: 10px 5px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        color: $color-white;
+        background-color: $color-dark;
+        border-left: 1px solid $color-white;
+        cursor: default;
+  
+        &:last-child {
+          border-radius: 1px solid $color-white;
+        }
+      }
+    }
+  
+    .NotFound {
+    
+    }
+  }
+}

@@ -7,6 +7,7 @@ import Loading from 'components/Loading/Loading'
 const Home = lazy(() => import('components/Home/Home'))
 const Login = lazy(() => import('containers/Login/LoginContainer'))
 const Logout = lazy(() => import('containers/Logout/LogoutContainer'))
+const Contacts = lazy(() => import('containers/Contacts/ContactsContainer'))
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const isLogged = useSelector(({ login: { isLogged } }) => isLogged)
@@ -32,7 +33,7 @@ const Router = () => (
           <Route path="/" component={ Home } exact />
           <Route path="/login" component={ Login } />
           <Route path="/logout" component={ Logout } />
-          <PrivateRoute path="/contacts" component={ () => <h1 className="wrapper">Contacts</h1>  }/>
+          <PrivateRoute path="/contacts" component={ Contacts }/>
           <PrivateRoute path="/contact-details/:userId" component={ () => <h1 className="wrapper">Contact Details</h1> } />
         </Switch>
       </Suspense>

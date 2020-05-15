@@ -18,8 +18,8 @@ const appSlice = createSlice({
     loadingOff: state => {
       state.loading = false
     },
-    setAlert: (state, payload) => {
-      state.alert = { status: true, message: payload.payload } 
+    setAlert: (state, { payload }) => {
+      state.alert = { status: true, message: payload }
     },
     unsetAlert: state => {
       state.alert = { status: false, message: '' }

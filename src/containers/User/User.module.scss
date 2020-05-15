@@ -1,0 +1,54 @@
+@import '../../assets/sass/variables';
+
+.User {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .Favorite,
+  .Details,
+  .Select,
+  .Delete {
+    flex: 1;
+
+    > button {
+      font-size: 20px;
+      border: none;
+      background-color: transparent;
+
+      > svg {
+        color: $color-orange;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .Details > button > svg {
+    color: $color-blue;
+  }
+
+  .Delete > button > svg {
+    color: $color-red;
+  }
+
+  .Name {  
+    flex: 8;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  > div {
+    margin-top: 5px;
+    padding: 10px 5px;
+    text-align: center;
+    color: $color-dark;
+    background-color: $color-white;
+    border-left: 1px solid $color-white;
+    cursor: default;
+
+    &:last-child {
+      border-radius: 1px solid $color-white;
+    }
+  }
+}
