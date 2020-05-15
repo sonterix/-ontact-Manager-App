@@ -15,6 +15,44 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .FavoritePlaceholder,
+      .NamePlaceholder,
+      .SelectPlaceholder {
+        position: relative;
+        cursor: pointer;
+        
+        > button {
+          width: 100%;
+          font-size: 18px;
+          font-weight: 600;
+          color: $color-white;
+          background-color: transparent;
+          border: none;
+        }
+
+        &::before {
+          content: 'Sort';
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%) translateY(5px);
+          padding: 3px 5px;
+          font-size: 12px;
+          font-weight: 400;
+          color: $color-white;
+          background-color: rgba($color-orange, 0.9);
+          border-radius: 3px;
+          opacity: 0;
+          transition: all $trans-md;
+          z-index: 5;
+        }
+
+        &:hover::before {
+          transform: translateX(-50%) translateY(0);
+          opacity: 1;
+        }
+      }
   
       .FavoritePlaceholder,
       .DetailsPlaceholder,

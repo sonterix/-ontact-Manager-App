@@ -4,7 +4,7 @@ import { getUsers } from 'helpers.js'
 import User from 'containers/User/UserContainer'
 import styles from './Contacts.module.scss'
 
-const Contacts = ({ setUsers, users, activePage, totalPages, deleteSelected, deleteSelectedButton }) => {
+const Contacts = ({ setUsers, users, activePage, totalPages, sortByFavorite, sortByName, sortByChecked, deleteSelected, deleteSelectedButton }) => {
   useEffect(() => {
     if (!users.length) {
       (async () => {
@@ -21,9 +21,15 @@ const Contacts = ({ setUsers, users, activePage, totalPages, deleteSelected, del
         { users.length
           ? <>
               <li className={ styles.Placeholder }>
-                <div className={ styles.FavoritePlaceholder }>Fav</div>
-                <div className={ styles.NamePlaceholder }>Name</div>
-                <div className={ styles.SelectPlaceholder }>Select</div>
+                <div className={ styles.FavoritePlaceholder }>
+                  <button onClick={ () => sortByFavorite() }>Fav</button>
+                </div>
+                <div className={ styles.NamePlaceholder }>
+                  <button onClick={ () => sortByName() }>Name</button>
+                </div>
+                <div className={ styles.SelectPlaceholder }>
+                  <button onClick={ () => sortByChecked() }>Select</button>
+                </div>
                 <div className={ styles.DetailsPlaceholder }>Details</div>
                 <div className={ styles.DeletePlaceholder }>Delete</div>
               </li>
@@ -45,12 +51,18 @@ const Contacts = ({ setUsers, users, activePage, totalPages, deleteSelected, del
 
 Contacts.propTypes = {
   updatedProps: PropTypes.func,
+  sortByFavorite: PropTypes.func,
+  sortByName: PropTypes.func,
+  sortByChecked: PropTypes.func,
   deleteSelected: PropTypes.func,
   deleteSelectedButton: PropTypes.bool
 }
 
 Contacts.defaultProps = {
   updatedProps: () => {},
+  sortByFavorite: () => {},
+  sortByName:  () => {},
+  sortByChecked: () => {},
   deleteSelected: () => {},
   deleteSelectedButton: false
 }
