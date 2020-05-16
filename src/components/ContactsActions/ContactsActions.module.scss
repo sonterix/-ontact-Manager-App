@@ -1,0 +1,38 @@
+@import '../../assets/sass/variables';
+
+.Actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  width: 100%;
+
+  .DeleteSelected {
+    color: $color-white;
+    background-color: $color-red;
+
+    &:hover {
+      background-color: darken($color-red, 15);
+    }
+
+    &:disabled {
+      background-color: darken($color-lightgrey, 30);
+    }
+  }
+
+  > button {
+    display: block;
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+
+    &:last-child {
+      margin-left: 0;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}

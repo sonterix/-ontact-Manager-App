@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { API_URL, API_USERS } from 'helpers.js'
+import { setAlertAction, unsetAlertAction, loadingOnAction, loadingOffAction } from "./appSlice"
 
 const initialState = {
   users: [],
@@ -72,8 +74,26 @@ const contactsSlice = createSlice({
   }
 })
 
+contactsSlice.actions.getUsers = payload => async dispatch => {
+  dispatch(loadingOnAction())
+
+  try {
+    const response = await fetch(`${ API_URL }${ API_USERS }${ payload }`)
+    const { data, total_pages } = await response.json()
+    const users = data.map(user => ({ ...user, favorite: false, checked: false }))
+
+    dispatch(loadingOffAction())
+    dispatch(setUsersAction({users, total_pages}))
+  } catch {
+    dispatch(loadingOffAction())
+    dispatch(setAlertAction('Error with fetching data from API'))
+    setTimeout(dispatch(unsetAlertAction()), 4000)
+  }
+}
+
 export const {
   setUsers: setUsersAction,
+  getUsers: getUsersAction,
   toggleFavorite: toggleFavoriteAction,
   toggleCheck: toggleCheckAction,
   sortByFavorite: sortByFavoriteAction,

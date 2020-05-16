@@ -20,13 +20,9 @@ const loginSlice = createSlice({
   }
 })
 
-export const {
-  loginUser: loginUserAction,
-  logoutUser: logoutUserAction
-} = loginSlice.actions
-
-export const checkUser = (user, token) => async dispatch => {
+loginSlice.actions.checkUser = ({ user, token }) => async dispatch => {
   dispatch(loadingOnAction())
+
   const response = await new Promise((resolve) => {
     setTimeout(() => {
       if (token) {
@@ -34,7 +30,7 @@ export const checkUser = (user, token) => async dispatch => {
       } else {
         resolve({ logged: false })
       }
-    }, 250)
+    }, 100)
   })
 
   const { logged } = await response
@@ -47,5 +43,11 @@ export const checkUser = (user, token) => async dispatch => {
 
   dispatch(loadingOffAction())
 }
+
+export const {
+  loginUser: loginUserAction,
+  logoutUser: logoutUserAction,
+  checkUser: checkUserAction
+} = loginSlice.actions
 
 export default loginSlice

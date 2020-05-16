@@ -1,7 +1,7 @@
 // API
-const API_URL = 'https://reqres.in/'
-const API_LOGIN = 'api/login'
-const API_USERS = 'api/users?page='
+export const API_URL = 'https://reqres.in/'
+export const API_LOGIN = 'api/login'
+export const API_USERS = 'api/users?page='
 
 // Auth
 export const auth = async data => {
@@ -31,17 +31,6 @@ export const setLoginLS = (token, user) => {
 export const setLogoutLS = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
-}
-
-// Users
-export const getUsers = async (page = 1) => {
-  try {
-    const response = await fetch(`${ API_URL }${ API_USERS }${ page }`)
-    const { data, total_pages } = await response.json()
-    return { data, total_pages }
-  } catch {
-    return { error: 'Error with fetching data from the API' }
-  }
 }
 
 // Nav

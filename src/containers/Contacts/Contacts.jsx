@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { getUsers } from 'helpers.js'
 import User from 'containers/User/UserContainer'
 import styles from './Contacts.module.scss'
 import Pagination from 'components/Pagination/Pagination'
+import ContactsActions from 'components/ContactsActions/ContactsActions'
 
 const Contacts = ({
   computedMatch = {},
+  getUsers,
   setUsers,
   users,
   totalPages,
@@ -19,11 +20,7 @@ const Contacts = ({
   const { params: { pageId = 1 } = {} } = computedMatch
 
   useEffect(() => {
-    (async () => {
-      const { data, total_pages } = await getUsers(pageId)
-      const users = data.map(user => ({ ...user, favorite: false, checked: false }))
-      setUsers({ users, total_pages })
-    })()
+    getUsers(pageId)
   }, [pageId])
 
   return (
@@ -52,21 +49,17 @@ const Contacts = ({
       </ul>
 
       { users.length
-      && <>
-          <div className={ styles.Actions }>
-            <button className={ styles.DeleteSelected } onClick={ () => deleteSelected() } disabled={ !deleteSelectedButton }>
-              Delete Selected
-            </button>
-          </div>
-
-          <Pagination totalPages={ totalPages } pageId={ +pageId } />
-        </>
+        ? <ContactsActions deleteSelected={ deleteSelected }  deleteSelectedButton={ deleteSelectedButton } />
+        : null
       }
+
+      <Pagination totalPages={ totalPages } pageId={ +pageId } />
     </div>
   )
 }
 
 Contacts.propTypes = {
+  getUsers: PropTypes.func,
   setUsers: PropTypes.func,
   users: PropTypes.array,
   totalPages: PropTypes.number,
@@ -78,6 +71,7 @@ Contacts.propTypes = {
 }
 
 Contacts.defaultProps = {
+  getUsers: () => {},
   setUsers: () => {},
   users: [],
   totalPages: 1,
