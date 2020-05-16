@@ -1,0 +1,13 @@
+.Homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 55px);
+  background-color: #45acbd;
+
+  img {
+    max-width: 600px;
+    pointer-events: none;
+  }
+}

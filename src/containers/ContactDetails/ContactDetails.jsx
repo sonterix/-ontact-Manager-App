@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Mailto from 'react-protected-mailto'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons'
-import Mailto from 'react-protected-mailto'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from './ContactDetails.module.scss'
-import { useHistory } from 'react-router-dom'
 
 const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, deleteUser }) => {
   const { goBack } = useHistory()
