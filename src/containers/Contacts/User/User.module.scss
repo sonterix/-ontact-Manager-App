@@ -21,6 +21,10 @@
         color: $color-orange;
         transition: color $trans-md;
       }
+
+      @media (max-width: $sm) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -55,6 +59,10 @@
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 1px;
+
+    @media (max-width: $sm) {
+      flex: 5;
+    }
   }
 
   > div {

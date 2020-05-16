@@ -25,6 +25,10 @@ body {
     transition: all $trans-md;
     cursor: pointer;
   }
+
+  img {
+    width: 100%;
+  }
   
   .wrapper {
     max-width: 1330px;

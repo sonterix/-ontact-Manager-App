@@ -12,6 +12,10 @@
   margin: 15px;
   font-size: 52px;
   color: $color-orange;
+
+  @media (max-width: $sm) {
+    font-size: 34px;
+  }
 }
 
 .LoginForm {
@@ -34,6 +38,10 @@
 
       &:hover {
         color: darken($color-blue, 15);
+      }
+
+      @media (max-width: $sm) {
+        right: 10px;
       }
     }
   }

@@ -23,6 +23,22 @@
       font-size: 84px;
       font-weight: 800;
       line-height: 1;
+
+      @media (max-width: $md) {
+        font-size: 64px;
+      }
+
+      @media (max-width: $sm) {
+        font-size: 42px;
+      }
+    }
+
+    @media (max-width: $md) {
+      font-size: 48px;
+    }
+
+    @media (max-width: $sm) {
+      font-size: 34px;
     }
   }
 

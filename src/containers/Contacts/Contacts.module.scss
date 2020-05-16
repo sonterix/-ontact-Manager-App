@@ -29,6 +29,10 @@
           color: $color-white;
           background-color: transparent;
           border: none;
+
+          @media (max-width: $sm) {
+            font-size: 12px;
+          }
         }
 
         &::before {
@@ -63,6 +67,10 @@
   
       .NamePlaceholder {  
         flex: 8;
+
+        @media (max-width: $sm) {
+          flex: 5;
+        }
       }
   
       > div {
@@ -78,6 +86,10 @@
   
         &:last-child {
           border-radius: 1px solid $color-white;
+        }
+
+        @media (max-width: $sm) {
+          font-size: 12px;
         }
       }
     }

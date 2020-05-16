@@ -8,6 +8,7 @@
   width: 100%;
 
   .ActionsLeft {
+    flex: 1;
     width: inherit;
 
     .PerPage {
@@ -54,9 +55,16 @@
         opacity: 1;
       }
     }
+
+    @media (max-width: $sm) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .ActionsRight {
+    flex: 3;
     display: flex;
     justify-content: flex-end;
     width: inherit;
@@ -104,5 +112,15 @@
         cursor: not-allowed;
       }
     }
+
+    @media (max-width: $sm) {
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: $sm) {
+    flex-direction: column-reverse;
   }
 }

@@ -65,5 +65,9 @@
         }
       }
     }
+
+    @media (max-width: $sm) {
+      width: 80%;
+    }
   }
 }
