@@ -4,28 +4,86 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   margin: 25px auto;
   padding: 25px;
   max-width: 450px;
   width: 100%;
   background-color: $color-white;
 
+  .Actions {
+    display: flex;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+
+    > button {
+      margin-right: 5px;
+      padding: 3px;
+      background-color: transparent;
+      border: none;
+
+      &.UserFavorite {
+        font-size: 18px;
+        color: $color-orange;
+      }
+
+      &.UserEdit {
+        font-size: 18px;
+        color: $color-blue;
+      }
+  
+      &.UserDelete {
+        font-size: 16px;
+        color: $color-red;
+      }
+
+      &:disabled {
+        color: darken($color-lightgrey, 30);
+      }
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
   .UserAvatar {
     margin-bottom: 15px;
 
-    > img {
+    img {
       display: inline-block;
       max-width: 128px;
+      max-height: 128px;
       width: 100%;
       border-radius: 50%;
+      object-fit: cover;
+      pointer-events: none;
     }
   }
 
   .UserName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 5px;
+    max-width: 300px;
+    width: 100%;
     font-size: 24px;
     font-weight: 600;
     color: $color-dark;
+
+    > input {
+      margin: 0 10px;
+      padding: 5px;
+      width: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      color: $color-dark;
+      border: none;
+      border: 1px solid darken($color-lightgrey, 25);
+    }
   }
 
   .UserEmail {
@@ -43,9 +101,52 @@
   }
 
   .UserDescription {
+    max-width: 300px;
+    width: 100%;
     font-size: 16px;
     font-weight: 400;
     text-align: center;
     color: $color-dark;
+
+    > textarea {
+      padding: 5px 10px;
+      width: inherit;
+      font-size: 14px;
+      font-weight: 400;
+      text-align: center;
+      color: $color-dark;
+      border: 1px solid darken($color-lightgrey, 25);
+      resize: vertical;
+    }
+  }
+
+  .EditActions {
+    margin-top: 15px;
+
+    > button {
+      display: inline-block;
+      margin: 0 5px;
+      padding: 5px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: $color-white;
+      border: none;
+
+      &.Save {
+        background-color: $color-blue;
+  
+        &:hover {
+          background-color: darken($color-blue, 15);
+        }
+      }
+  
+      &.Cancel {
+        background-color: darken($color-lightgrey, 25);
+  
+        &:hover {
+          background-color: darken($color-lightgrey, 40);
+        }
+      }
+    }
   }
 }

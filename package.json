@@ -15,6 +15,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-lazy-load-image-component": "^1.4.3",
     "react-protected-mailto": "^1.0.3",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",

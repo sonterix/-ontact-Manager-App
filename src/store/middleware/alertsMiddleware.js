@@ -3,9 +3,14 @@ import { setAlertAction, unsetAlertAction } from "store/slices/appSlice"
 
 const alertsMiddleware = ({ dispatch }) => next => action => {
   const { type } = action
-  const { deleteUser, deleteSelected } = contactsSlice.actions
+  const { updateUser, deleteUser, deleteSelected } = contactsSlice.actions
 
   switch (type) {
+    case `${ updateUser }`:
+      dispatch(setAlertAction('Updated'))
+      setTimeout(() => dispatch(unsetAlertAction()), 2000)
+      break
+
     case `${ deleteUser }`:
     case `${ deleteSelected }`:
       dispatch(setAlertAction('Deleted'))

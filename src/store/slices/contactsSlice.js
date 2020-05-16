@@ -23,6 +23,9 @@ const contactsSlice = createSlice({
       state.users = users
       state.totalPages = total_pages
     },
+    updateUser: (state, { payload }) => {
+      state.users = state.users.map(user => user.id === payload.id ? { ...payload } : user)
+    },
     toggleFavorite: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload ? { ...user, favorite: !user.favorite } : user)
     },
@@ -80,7 +83,12 @@ contactsSlice.actions.getUsers = payload => async dispatch => {
   try {
     const response = await fetch(`${ API_URL }${ API_USERS }${ payload }`)
     const { data, total_pages } = await response.json()
-    const users = data.map(user => ({ ...user, favorite: false, checked: false }))
+    const users = data.map(user => ({
+      ...user,
+      favorite: false,
+      checked: false,
+      description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui dolor exercitationem similique sed voluptatem consequatur sapiente repellendus ipsa recusandae laudantium.'
+    }))
 
     dispatch(loadingOffAction())
     dispatch(setUsersAction({users, total_pages}))
@@ -109,6 +117,7 @@ contactsSlice.actions.postUpdatedUser = () => async dispatch => {
 export const {
   setUsers: setUsersAction,
   getUsers: getUsersAction,
+  updateUser: updateUserAction,
   postUpdatedUser: postUpdatedUserAction,
   toggleFavorite: toggleFavoriteAction,
   toggleCheck: toggleCheckAction,
