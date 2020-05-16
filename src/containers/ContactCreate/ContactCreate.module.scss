@@ -1,0 +1,76 @@
+@import '../../assets/sass/variables';
+
+.CreateFormWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.CreateFormTitle {
+  margin: 15px;
+  font-size: 52px;
+  color: $color-orange;
+}
+
+.CreateForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  > input,
+  > textarea {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    min-width: 350px;
+    font-size: 16px;
+    border: 1px solid darken($color-lightgrey, 25);
+    transition: border-color $trans-md;
+    resize: vertical;
+
+    &:global(.error) {
+      border-color: $color-red;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: $color-orange;
+    }
+  }
+
+  .CreateFormAction {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+
+    > button {
+      flex: 1;
+      width: inherit;
+      padding: 10px;
+      color: $color-white;
+      border: none;
+      font-size: 16px;
+      transition: background-color $trans-md;
+  
+      &.Submit {
+        margin-right: 5px;
+        background-color: $color-dark;
+  
+        &:hover {
+          background-color: $color-green;
+        }
+      }
+  
+      &.Cancel {
+        margin-left: 5px;
+        background-color: darken($color-lightgrey, 25);
+  
+        &:hover {
+          background-color: $color-red;
+        }
+      }
+    }
+  }
+}

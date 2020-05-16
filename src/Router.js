@@ -9,7 +9,7 @@ const Login = lazy(() => import('containers/Login/LoginContainer'))
 const Logout = lazy(() => import('containers/Logout/LogoutContainer'))
 const Contacts = lazy(() => import('containers/Contacts/ContactsContainer'))
 const ContactDetails = lazy(() => import('containers/ContactDetails/ContactDetailsContainer'))
-const ContactCreate = lazy(() => import('containers/ContactCreate/ContactCreate'))
+const ContactCreate = lazy(() => import('containers/ContactCreate/ContactCreateContainer'))
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const isLogged = useSelector(({ login: { isLogged } }) => isLogged)

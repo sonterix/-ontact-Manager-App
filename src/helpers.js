@@ -1,16 +1,28 @@
 // API
-export const API_URL = 'https://reqres.in/'
-export const API_LOGIN = 'api/login'
-export const API_USERS = 'api/users?page='
+const API_URL = 'https://reqres.in/'
+const API_LOGIN = 'api/login'
+const API_USERS = 'api/users?page='
+const API_PAGE = '?page='
+
+// Nav
+const NAV_ITEMS = {
+  userLogin: [
+    { id: 1, path: '/', name: 'Home' },
+    { id: 2, path: '/contacts', name: 'Contacts' },
+    { id: 3, path: '/logout', name: 'Logout' }
+  ],
+  userLogout: [
+    { id: 1, path: '/', name: 'Home' },
+    { id: 2, path: '/login', name: 'Login' }
+  ]
+}
 
 // Auth
-export const auth = async data => {
+const auth = async data => {
   try {
     const response = await fetch(`${ API_URL }${ API_LOGIN }`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
     const { token = null, error = null } = await response.json()
@@ -23,31 +35,18 @@ export const auth = async data => {
   }
 }
 
-export const setLoginLS = (token, user) => {
+const setLoginLS = (token, user) => {
   localStorage.setItem('token', token)
   localStorage.setItem('user', user)
 }
 
-export const setLogoutLS = () => {
+const setLogoutLS = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
 }
 
-// Nav
-export const NAV_ITEMS = {
-  userLogin: [
-    { id: 1, path: '/', name: 'Home' },
-    { id: 2, path: '/contacts', name: 'Contacts' },
-    { id: 3, path: '/logout', name: 'Logout' }
-  ],
-  userLogout: [
-    { id: 1, path: '/', name: 'Home' },
-    { id: 2, path: '/login', name: 'Login' }
-  ]
-}
-
 // Checks (works with ref)
-export const checkForEmptyInputs = inputs => {
+const checkForEmptyInputs = inputs => {
   let error = false
 
   inputs.forEach(element => {
@@ -60,4 +59,16 @@ export const checkForEmptyInputs = inputs => {
   })
 
   return error
+}
+
+export {
+  API_URL,
+  API_LOGIN,
+  API_USERS,
+  API_PAGE,
+  NAV_ITEMS,
+  auth,
+  setLoginLS,
+  setLogoutLS,
+  checkForEmptyInputs
 }

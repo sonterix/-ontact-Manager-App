@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { API_URL, API_USERS } from 'helpers.js'
+import { v4 as uuid } from 'uuid'
+import { API_URL, API_USERS, API_PAGE } from 'helpers.js'
 import { setAlertAction, unsetAlertAction, loadingOnAction, loadingOffAction } from "./appSlice"
 
 const initialState = {
@@ -22,6 +23,10 @@ const contactsSlice = createSlice({
     setUsers: (state, { payload: { users, total_pages } }) => {
       state.users = users
       state.totalPages = total_pages
+    },
+    putUser: (state, { payload }) => {
+      const newUser = { ...payload, id: uuid(), favorite: false, checked: false, }
+      state.users.push(newUser)
     },
     updateUser: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload.id ? { ...payload } : user)
@@ -81,7 +86,7 @@ contactsSlice.actions.getUsers = payload => async dispatch => {
   dispatch(loadingOnAction())
 
   try {
-    const response = await fetch(`${ API_URL }${ API_USERS }${ payload }`)
+    const response = await fetch(`${ API_URL }${ API_USERS }${ API_PAGE }${ payload }`)
     const { data, total_pages } = await response.json()
     const users = data.map(user => ({
       ...user,
@@ -118,6 +123,7 @@ export const {
   setUsers: setUsersAction,
   getUsers: getUsersAction,
   updateUser: updateUserAction,
+  putUser: putUserAction,
   postUpdatedUser: postUpdatedUserAction,
   toggleFavorite: toggleFavoriteAction,
   toggleCheck: toggleCheckAction,

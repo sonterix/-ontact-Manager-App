@@ -6,29 +6,43 @@
   margin-top: 25px;
   width: 100%;
 
-  .DeleteSelected {
-    color: $color-white;
-    background-color: $color-red;
-
-    &:hover {
-      background-color: darken($color-red, 15);
-    }
-
-    &:disabled {
-      background-color: darken($color-lightgrey, 30);
-    }
-  }
-
-  > button {
+  > button,
+  > a {
     display: block;
-    margin-left: 10px;
+    margin-right: 10px;
     padding: 10px 15px;
     font-size: 14px;
     font-weight: 600;
     border: none;
 
+    > svg {
+      margin-right: 3px;
+    }
+
+    &.AddContact {
+      color: $color-white;
+      background-color: $color-green;
+
+      &:hover {
+        background-color: darken($color-green, 15);
+      }
+    }
+
+    &.DeleteSelected {
+      color: $color-white;
+      background-color: $color-red;
+  
+      &:hover {
+        background-color: darken($color-red, 15);
+      }
+  
+      &:disabled {
+        background-color: darken($color-lightgrey, 30);
+      }
+    }
+
     &:last-child {
-      margin-left: 0;
+      margin-right: 0;
     }
 
     &:disabled {
