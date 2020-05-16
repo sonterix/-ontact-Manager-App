@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { v4 as uuid } from 'uuid'
+import uuid from 'uuid-int'
 import { API_URL, API_USERS, API_PAGE } from 'helpers.js'
 import { setAlertAction, unsetAlertAction, loadingOnAction, loadingOffAction } from "./appSlice"
 
@@ -25,7 +25,7 @@ const contactsSlice = createSlice({
       state.totalPages = total_pages
     },
     putUser: (state, { payload }) => {
-      const newUser = { ...payload, id: uuid(), favorite: false, checked: false, }
+      const newUser = { ...payload, id: uuid(20).uuid(), favorite: false, checked: false, }
       state.users.push(newUser)
     },
     updateUser: (state, { payload }) => {

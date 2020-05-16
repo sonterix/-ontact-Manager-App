@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { checkForEmptyInputs } from 'helpers.js'
 import styles from './ContactCreate.module.scss'
+import { useHistory } from 'react-router-dom'
 
 const ContactCreate = ({ putUser }) => {
   const initialState = {
@@ -19,6 +20,8 @@ const ContactCreate = ({ putUser }) => {
   const emailInput = useRef()
   const descriptionInput = useRef()
 
+  const { push } = useHistory()
+
   const handleInputData = ({ target: { name, value } }) => setUser({ ...user, [name]: value }) 
 
   const handleSubmitForm = async event => {
@@ -35,6 +38,7 @@ const ContactCreate = ({ putUser }) => {
     if (!inputErrors) {
       putUser(user)
       setUser(initialState)
+      push('/contacts')
     }
   }
 
