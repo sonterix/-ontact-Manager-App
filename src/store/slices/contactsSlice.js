@@ -87,13 +87,29 @@ contactsSlice.actions.getUsers = payload => async dispatch => {
   } catch {
     dispatch(loadingOffAction())
     dispatch(setAlertAction('Error with fetching data from API'))
-    setTimeout(dispatch(unsetAlertAction()), 4000)
+    setTimeout(() => dispatch(unsetAlertAction()), 4000)
   }
+}
+
+contactsSlice.actions.postUpdatedUser = () => async dispatch => {
+  // fake update users on backend
+  dispatch(loadingOnAction())
+
+  const response = await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ status: 'updated' })
+    }, 200)
+  })
+
+  await response
+  
+  dispatch(loadingOffAction())
 }
 
 export const {
   setUsers: setUsersAction,
   getUsers: getUsersAction,
+  postUpdatedUser: postUpdatedUserAction,
   toggleFavorite: toggleFavoriteAction,
   toggleCheck: toggleCheckAction,
   sortByFavorite: sortByFavoriteAction,

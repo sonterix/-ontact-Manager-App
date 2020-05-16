@@ -21,6 +21,7 @@ const loginSlice = createSlice({
 })
 
 loginSlice.actions.checkUser = ({ user, token }) => async dispatch => {
+  // fake check token on backend
   dispatch(loadingOnAction())
 
   const response = await new Promise((resolve) => {
