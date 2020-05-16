@@ -1,0 +1,51 @@
+@import '../../assets/sass/variables';
+
+.UserCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px auto;
+  padding: 25px;
+  max-width: 450px;
+  width: 100%;
+  background-color: $color-white;
+
+  .UserAvatar {
+    margin-bottom: 15px;
+
+    > img {
+      display: inline-block;
+      max-width: 128px;
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .UserName {
+    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-dark;
+  }
+
+  .UserEmail {
+    margin-bottom: 15px;
+
+    > a {
+      font-size: 16px;
+      font-weight: 400;
+      color: lighten($color-dark, 20);
+
+      &:hover {
+        color: $color-orange;
+      }
+    }
+  }
+
+  .UserDescription {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: $color-dark;
+  }
+}

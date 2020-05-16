@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faInfoCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar, faCircle, faCheckCircle } from '@fortawesome/free-regular-svg-icons'
 import styles from './User.module.scss'
+import { Link } from 'react-router-dom'
 
 const User = ({ user: { id, first_name, last_name, favorite, checked }, toggleFavorite, toggleCheck, deleteUser }) => {
   return (
@@ -22,9 +23,9 @@ const User = ({ user: { id, first_name, last_name, favorite, checked }, toggleFa
         </button>
       </div>
       <div className={ styles.Details }>
-        <button>
+        <Link to={ `/contact-details/${ id }` }>
           <FontAwesomeIcon icon={ faInfoCircle } />
-        </button>
+        </Link>
       </div>
       <div className={ styles.Delete }>
         <button onClick={ () => deleteUser(id) }>

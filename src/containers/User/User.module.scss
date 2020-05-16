@@ -11,6 +11,7 @@
   .Delete {
     flex: 1;
 
+    > a,
     > button {
       font-size: 20px;
       border: none;
@@ -23,7 +24,7 @@
     }
   }
 
-  .Details > button {
+  .Details > a {
 
     > svg {
       color: $color-blue;
