@@ -99,8 +99,12 @@
       font-weight: 600;
       text-align: center;
       color: $color-dark;
-      border: none;
-      border: 1px solid darken($color-lightgrey, 25);
+      background-color: darken($color-lightgrey, 5);
+      border: 1px solid darken($color-lightgrey, 5);
+
+      &:focus {
+        border-color: darken($color-lightgrey, 25);
+      }
     }
   }
 
@@ -133,8 +137,13 @@
       font-weight: 400;
       text-align: center;
       color: $color-dark;
-      border: 1px solid darken($color-lightgrey, 25);
+      background-color: darken($color-lightgrey, 5);
+      border: 1px solid darken($color-lightgrey, 5);
       resize: vertical;
+      
+      &:focus {
+        border-color: darken($color-lightgrey, 25);
+      }
     }
   }
 

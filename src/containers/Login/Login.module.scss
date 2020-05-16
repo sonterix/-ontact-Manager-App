@@ -18,8 +18,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .Hint {
+    position: relative;
+
+    > button {
+      position: absolute;
+      top: calc(50% - 5px);
+      right: -35px;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: $color-blue;
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        color: darken($color-blue, 15);
+      }
+    }
+  }
   
-  > input {
+  input {
     margin-bottom: 10px;
     padding: 5px 10px;
     min-width: 250px;
