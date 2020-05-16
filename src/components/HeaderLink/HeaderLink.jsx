@@ -24,6 +24,13 @@ const handleGetLink = (path, name) => {
         </NavLink>
       )
 
+    case 'Contacts':
+      return (
+        <NavLink to={ path }>
+          <span>{ name }</span>
+        </NavLink>
+      )
+
     default:
       return (
         <NavLink to={ path } exact>

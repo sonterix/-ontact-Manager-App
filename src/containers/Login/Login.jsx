@@ -39,7 +39,7 @@ const Login = ({ isLogged, loginUser, loadingOn, loadingOff, setAlert, unsetAler
         loginUser(email, token)
         loadingOff()
 
-        const { from } = location.state || { from: { pathname: '/contacts/1' } }
+        const { from } = location.state || { from: { pathname: '/contacts' } }
         push(from)
       }
     }

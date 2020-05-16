@@ -34,7 +34,7 @@ const Router = () => (
           <Route path="/" component={ Home } exact />
           <Route path="/login" component={ Login } exact />
           <Route path="/logout" component={ Logout } exact />
-          <PrivateRoute path="/contacts/:pageId" component={ Contacts } />
+          <PrivateRoute path={[ '/contacts/:pageId', '/contacts' ]} component={ Contacts } />
           <PrivateRoute path="/contact-details/:userId" component={ ContactDetails } />
         </Switch>
       </Suspense>
