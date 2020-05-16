@@ -3,12 +3,13 @@
 .Pagination {
   margin: 25px auto;
 
-  > a {
+  > button {
     display: inline-block;
     padding: 5px 10px;
     margin: 0 3px;
     color: $color-white; 
     background-color: $color-dark;
+    border: none;
 
     &:hover {
       background-color: lighten($color-dark, 10);

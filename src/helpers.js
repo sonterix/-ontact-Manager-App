@@ -1,8 +1,8 @@
 // API
 const API_URL = 'https://reqres.in/'
 const API_LOGIN = 'api/login'
-const API_USERS = 'api/users?page='
-const API_PAGE = '?page='
+const API_USERS = 'api/users'
+const API_PAGE = '?per_page=9999'
 
 // Nav
 const NAV_ITEMS = {
@@ -61,6 +61,18 @@ const checkForEmptyInputs = inputs => {
   return error
 }
 
+// Split users for pagination
+const splitUsers = (users, perPage) => {
+  const splitedUsers = []
+  
+  for (let index = 0; index < users.length; index += perPage) {
+    const chunk = users.slice(index, index + perPage)
+    splitedUsers.push(chunk)
+  }
+
+  return splitedUsers
+}
+
 export {
   API_URL,
   API_LOGIN,
@@ -70,5 +82,6 @@ export {
   auth,
   setLoginLS,
   setLogoutLS,
+  splitUsers,
   checkForEmptyInputs
 }

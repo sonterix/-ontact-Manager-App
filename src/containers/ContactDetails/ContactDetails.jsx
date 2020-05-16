@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons'
 import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert';
+import noavatar from 'assets/images/noavatar.png'
 import styles from './ContactDetails.module.scss'
 
 const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, deleteUser }) => {
@@ -66,11 +67,13 @@ const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, dele
             </button>
           </div>
 
-          { avatar
-            && <div className={ styles.UserAvatar }>
-              <LazyLoadImage src={ avatar } alt="avatar" effect="blur" width="128" height="128" />
-            </div>
-          }
+          
+          <div className={ styles.UserAvatar }>
+            { avatar
+              ? <LazyLoadImage src={ avatar } alt="avatar" effect="blur" width="128" height="128" />
+              : <LazyLoadImage src={ noavatar } alt="avatar" effect="blur" width="128" height="128" />
+            }
+          </div>
 
           <div className={ styles.UserName }>
             { editMode 

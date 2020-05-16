@@ -1,94 +1,74 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import User from 'containers/Contacts/User/UserContainer'
 import styles from './Contacts.module.scss'
 import Pagination from 'components/UI/Pagination/Pagination'
-import ContactsActions from 'components/ContactsActions/ContactsActions'
-import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert'
+import ContactsActions from 'containers/Contacts/ContactsActions/ContactsActionsContainer'
 
 const Contacts = ({
   computedMatch = {},
   getUsers,
-  users,
-  totalPages,
+  usersPerPage,
   sortByFavorite,
   sortByName,
   sortByChecked,
-  deleteSelected,
-  deleteSelectedButton
+  clearSelected
 }) => { 
-  const { params: { pageId = 1 } = {} } = computedMatch
-  const [ confirmPopup, setConfirmPopup ] = useState(false)
+  const { params: { pageId = 1 } } = computedMatch
+  const users = usersPerPage[pageId - 1] || []
 
   useEffect(() => {
-    getUsers(pageId)
+    if (!users.length) getUsers()
     // eslint-disable-next-line
-  }, [pageId])
+  }, [])
 
   return (
-    <>
-      { confirmPopup 
-        && <ConfirmAlert
-            submitBtn="Delete Selected"
-            submitFunc={ () => deleteSelected() }
-            cancelFunc={ () => setConfirmPopup(false) }
-          />
-      }
-      <div className={ `wrapper-sm ${ styles.UsersWrapper }` }>
-        <ul className={ styles.Users }>
-          { users.length
-            ? <>
-                <li className={ styles.Placeholder }>
-                  <div className={ styles.FavoritePlaceholder }>
-                    <button onClick={ () => sortByFavorite() }>Fav</button>
-                  </div>
-                  <div className={ styles.NamePlaceholder }>
-                    <button onClick={ () => sortByName() }>Name</button>
-                  </div>
-                  <div className={ styles.SelectPlaceholder }>
-                    <button onClick={ () => sortByChecked() }>Select</button>
-                  </div>
-                  <div className={ styles.DetailsPlaceholder }>Details</div>
-                  <div className={ styles.DeletePlaceholder }>Delete</div>
-                </li>
-
-              { users.map(user => <User key={ user.id } user={ user } />) }
-              </>
-            : <li className={ styles.NotFound }>Users Not Found</li>
-          }
-        </ul>
-
+    <div className={ `wrapper-sm ${ styles.UsersWrapper }` }>
+      <ul className={ styles.Users }>
         { users.length
-          ? <ContactsActions deleteSelected={ () => setConfirmPopup(true) }  deleteSelectedButton={ deleteSelectedButton } />
-          : null
-        }
+          ? <>
+              <li className={ styles.Placeholder }>
+                <div className={ styles.FavoritePlaceholder }>
+                  <button onClick={ () => sortByFavorite(pageId - 1) }>Fav</button>
+                </div>
+                <div className={ styles.NamePlaceholder }>
+                  <button onClick={ () => sortByName(pageId - 1) }>Name</button>
+                </div>
+                <div className={ styles.SelectPlaceholder }>
+                  <button onClick={ () => sortByChecked(pageId - 1) }>Select</button>
+                </div>
+                <div className={ styles.DetailsPlaceholder }>Details</div>
+                <div className={ styles.DeletePlaceholder }>Delete</div>
+              </li>
 
-        <Pagination totalPages={ totalPages } pageId={ +pageId } />
-      </div>
-    </>
+            { users.map(user => <User key={ user.id } user={ user } />) }
+            </>
+          : <li className={ styles.NotFound }>Users Not Found</li>
+        }
+      </ul>
+
+      <ContactsActions />
+      <Pagination totalPages={ usersPerPage.length } pageId={ +pageId } clearSelected={ clearSelected } />
+    </div>
   )
 }
 
 Contacts.propTypes = {
   getUsers: PropTypes.func,
-  users: PropTypes.array,
-  totalPages: PropTypes.number,
+  usersPerPage: PropTypes.array,
   sortByFavorite: PropTypes.func,
   sortByName: PropTypes.func,
   sortByChecked: PropTypes.func,
-  deleteSelected: PropTypes.func,
-  deleteSelectedButton: PropTypes.bool
+  clearSelected: PropTypes.func
 }
 
 Contacts.defaultProps = {
   getUsers: () => {},
-  users: [],
-  totalPages: 1,
+  usersPerPage: [],
   sortByFavorite: () => {},
   sortByName:  () => {},
   sortByChecked: () => {},
-  deleteSelected: () => {},
-  deleteSelectedButton: false
+  clearSelected: () => {}
 }
 
 export default Contacts

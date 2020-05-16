@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 import uuid from 'uuid-int'
-import { API_URL, API_USERS, API_PAGE } from 'helpers.js'
+import { API_URL, API_USERS, API_PAGE, splitUsers } from 'helpers.js'
 import { setAlertAction, unsetAlertAction, loadingOnAction, loadingOffAction } from "./appSlice"
 
 const initialState = {
   users: [],
+  usersPerPage: [],
   sorted: {
     byFavorite: false,
     byName: false,
@@ -13,81 +14,100 @@ const initialState = {
   buttons: {
     deleteSelectedButton: false
   },
-  totalPages: 1
+  perPage: 6
 }
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialState,
   reducers: {
-    setUsers: (state, { payload: { users, total_pages } }) => {
-      state.users = users
-      state.totalPages = total_pages
+    setPerPage: (state, { payload }) => {
+      state.perPage = payload
+      state.usersPerPage = splitUsers(state.users, state.perPage)
+    },
+    setUsers: (state, { payload }) => {
+      state.users = payload
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     },
     putUser: (state, { payload }) => {
       const newUser = { ...payload, id: uuid(20).uuid(), favorite: false, checked: false, }
-      state.users.push(newUser)
+      state.users.unshift(newUser)
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     },
     updateUser: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload.id ? { ...payload } : user)
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     },
     toggleFavorite: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload ? { ...user, favorite: !user.favorite } : user)
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     },
     toggleCheck: (state, { payload }) => {
       state.users = state.users.map(user => user.id === payload ? { ...user, checked: !user.checked } : user)
       state.buttons.deleteSelectedButton = state.users.some(user => user.checked)
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     },
-    sortByFavorite: state => {
-      const favorites = state.users.some(user => user.favorite)
+    sortByFavorite: (state, { payload }) => {
+      const currentPage = state.usersPerPage[payload]
+      const favorites = currentPage.some(user => user.favorite)
 
       if (favorites) {
         if (state.sorted.byFavorite) {
-          state.users = state.users.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive > bFavorive ? 1 : -1)
+          state.usersPerPage[payload] = currentPage.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive > bFavorive ? 1 : -1)
           state.sorted.byFavorite = !state.sorted.byFavorite
         } else {
-          state.users = state.users.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive < bFavorive ? 1 : -1)
+          state.usersPerPage[payload] = currentPage.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive < bFavorive ? 1 : -1)
           state.sorted.byFavorite = !state.sorted.byFavorite
         }
       }
     },
-    sortByName: state => {
+    sortByName: (state, { payload }) => {
+      const currentPage = state.usersPerPage[payload]
+
       if (state.sorted.byName) {
-        state.users = state.users.sort(({ first_name: aName }, { first_name: bName }) => aName < bName ? 1 : -1)
+        state.usersPerPage[payload] = currentPage.sort(({ first_name: aName }, { first_name: bName }) => aName < bName ? 1 : -1)
         state.sorted.byName = !state.sorted.byName
       } else {
-        state.users = state.users.sort(({ first_name: aName }, { first_name: bName }) => aName > bName ? 1 : -1)
+        state.usersPerPage[payload] = currentPage.sort(({ first_name: aName }, { first_name: bName }) => aName > bName ? 1 : -1)
         state.sorted.byName = !state.sorted.byName
       }
     },
-    sortByChecked: state => {
-      const checked = state.users.some(user => user.checked)
-
+    sortByChecked: (state, { payload }) => {
+      const currentPage = state.usersPerPage[payload]
+      const checked = currentPage.some(user => user.checked)
+    
       if (checked) {
         if (state.sorted.byChecked) {
-          state.users = state.users.sort(({ checked: aChecked }, { checked: bChecked }) => aChecked > bChecked ? 1 : -1)
+          state.usersPerPage[payload] = currentPage.sort(({ checked: aChecked }, { checked: bChecked }) => aChecked > bChecked ? 1 : -1)
           state.sorted.byChecked = !state.sorted.byChecked
         } else {
-          state.users = state.users.sort(({ checked: aChecked }, { checked: bChecked }) => aChecked < bChecked ? 1 : -1)
+          state.usersPerPage[payload] = currentPage.sort(({ checked: aChecked }, { checked: bChecked }) => aChecked < bChecked ? 1 : -1)
           state.sorted.byChecked = !state.sorted.byChecked
         }
       }
+    },
+    clearSelected: state => {
+      state.users = state.users.map(user => ({ ...user, checked: false }))
+      state.usersPerPage = splitUsers(state.users, state.perPage)
+      state.buttons.deleteSelectedButton = false
     },
     deleteUser: (state, { payload }) => {
       state.users = state.users.filter(user => user.id !== payload)
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     },
     deleteSelected: state => {
       state.users = state.users.filter(user => user.checked === false)
+      state.usersPerPage = splitUsers(state.users, state.perPage)
     }
   }
 })
 
-contactsSlice.actions.getUsers = payload => async dispatch => {
+contactsSlice.actions.getUsers = () => async dispatch => {
   dispatch(loadingOnAction())
 
   try {
-    const response = await fetch(`${ API_URL }${ API_USERS }${ API_PAGE }${ payload }`)
-    const { data, total_pages } = await response.json()
+    const response = await fetch(`${ API_URL }${ API_USERS }${ API_PAGE }`)
+    const { data } = await response.json()
     const users = data.map(user => ({
       ...user,
       favorite: false,
@@ -96,7 +116,7 @@ contactsSlice.actions.getUsers = payload => async dispatch => {
     }))
 
     dispatch(loadingOffAction())
-    dispatch(setUsersAction({users, total_pages}))
+    dispatch(setUsersAction(users))
   } catch {
     dispatch(loadingOffAction())
     dispatch(setAlertAction('Error with fetching data from API'))
@@ -120,6 +140,7 @@ contactsSlice.actions.postUpdatedUser = () => async dispatch => {
 }
 
 export const {
+  setPerPage: setPerPageAction,
   setUsers: setUsersAction,
   getUsers: getUsersAction,
   updateUser: updateUserAction,
@@ -130,6 +151,7 @@ export const {
   sortByFavorite: sortByFavoriteAction,
   sortByName: sortByNameAction,
   sortByChecked: sortByCheckedAction,
+  clearSelected: clearSelectedAction,
   deleteUser: deleteUserAction,
   deleteSelected: deleteSelectedAction
 } = contactsSlice.actions

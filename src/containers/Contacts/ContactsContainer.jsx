@@ -4,35 +4,32 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   getUsersAction,
   setUsersAction,
-  deleteSelectedAction,
   sortByFavoriteAction,
   sortByNameAction,
   sortByCheckedAction,
+  clearSelectedAction,
 } from 'store/slices/contactsSlice'
 
 const ContactsContainer = props => {
-  const { users, totalPages } = useSelector(({ contacts }) => contacts)
-  const { deleteSelectedButton } = useSelector(({ contacts: { buttons } }) => buttons)
+  const { usersPerPage } = useSelector(({ contacts }) => contacts)
 
   const dispatch = useDispatch()
   const getUsers = page => dispatch(getUsersAction(page))
   const setUsers = users => dispatch(setUsersAction(users))
-  const sortByFavorite = () => dispatch(sortByFavoriteAction())
-  const sortByName = () => dispatch(sortByNameAction())
-  const sortByChecked = () => dispatch(sortByCheckedAction())
-  const deleteSelected = () => dispatch(deleteSelectedAction())
+  const sortByFavorite = pageId => dispatch(sortByFavoriteAction(pageId))
+  const sortByName = pageId => dispatch(sortByNameAction(pageId))
+  const sortByChecked = pageId => dispatch(sortByCheckedAction(pageId))
+  const clearSelected = () => dispatch(clearSelectedAction())
   
   const updatedProps = {
     ...props,
     getUsers,
     setUsers,
-    users,
-    totalPages,
+    usersPerPage,
     sortByFavorite,
     sortByName,
     sortByChecked,
-    deleteSelected,
-    deleteSelectedButton
+    clearSelected
   }
 
   return <Contacts { ...updatedProps } />

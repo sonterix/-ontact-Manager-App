@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { checkForEmptyInputs } from 'helpers.js'
+import { checkForEmptyInputs, getRandomAvatar } from 'helpers.js'
 import styles from './ContactCreate.module.scss'
 import { useHistory } from 'react-router-dom'
 
@@ -36,7 +36,8 @@ const ContactCreate = ({ putUser }) => {
     ])
 
     if (!inputErrors) {
-      putUser(user)
+      // Reset avatar due to we cant' show images from a local machine
+      putUser({ ...user, avatar: '' })
       setUser(initialState)
       push('/contacts')
     }
