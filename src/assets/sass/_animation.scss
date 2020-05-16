@@ -1,9 +1,18 @@
-@keyframes slideleft {
+@keyframes slideLeft {
   0% {
     transform: translateX(100%)
   }
   100% {
     transform: translateX(0)
+  }
+}
+
+@keyframes slideBottom {
+  0% {
+    transform: translateX(-50%) translateY(-100%)
+  }
+  100% {
+    transform: translateX(-50%) translateY(0)
   }
 }
 

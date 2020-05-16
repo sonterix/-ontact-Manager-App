@@ -1,0 +1,69 @@
+@import '../../assets/sass/variables';
+@import '../../assets/sass/animation';
+
+.ConfirmAlertWrapper {
+
+  .ConfirmAlertOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba($color-dark, 0.2);
+    opacity: 0;
+    animation: fadeIn 0.2s forwards;
+    z-index: 99;
+  }
+  
+  .ConfirmAlertPopup {
+    position: fixed;
+    top: calc(55px + 2%);
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    padding: 15px 25px;
+    min-width: 250px;
+    background-color: $color-dark;
+    animation: slideBottom 0.3s forwards;
+    z-index: 100;
+
+    .Message {
+      font-size: 18px;
+      text-align: center;
+      color: $color-white;
+    }
+
+    .Actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+
+      > button {
+        margin: 0 8px;
+        padding: 5px 10px;
+        min-width: 70px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 1;
+        color: $color-white;
+        border: none;
+
+        &.Submit {
+          background-color: $color-red;
+
+          &:hover {
+            background-color: darken($color-red, 15);
+          }
+        }
+  
+        &.Cancel {
+          background-color: darken($color-lightgrey, 25);
+
+          &:hover {
+            background-color: darken($color-lightgrey, 40);
+          }
+        }
+      }
+    }
+  }
+}

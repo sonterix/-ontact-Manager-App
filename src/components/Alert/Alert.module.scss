@@ -14,7 +14,7 @@
   color: $color-white;
   background-color: $color-blue;
   transform: translateX(100%);
-  animation: slideleft 0.3s forwards;
+  animation: slideLeft 0.3s forwards;
   cursor: default;
   z-index: 100;
 }

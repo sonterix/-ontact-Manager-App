@@ -6,11 +6,14 @@ import Mailto from 'react-protected-mailto'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons'
+import ConfirmAlert from 'components/ConfirmAlert/ConfirmAlert';
 import styles from './ContactDetails.module.scss'
 
 const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, deleteUser }) => {
   const { goBack } = useHistory()
+
   const [ editMode, setEditMode ] = useState(false)
+  const [ confirmPopup, setConfirmPopup ] = useState(false)
 
   const firstNameInput = useRef()
   const lastNameInput = useRef()
@@ -39,61 +42,71 @@ const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, dele
   }
 
   return (
-    <div className="wrapper-sm">
-      <div className={ styles.UserCard }>
+    <>
+      { confirmPopup 
+        && <ConfirmAlert
+            submitBtn="Delete"
+            submitFunc={ () => deleteUser(id) }
+            cancelFunc={ () => setConfirmPopup(false) }
+          />
+      }
+      
+      <div className="wrapper-sm">
+        <div className={ styles.UserCard }>
 
-        <div className={ styles.Actions }>
-          <button className={ styles.UserFavorite } onClick={ () => toggleFavorite(id) }>
-            <FontAwesomeIcon icon={ favorite ? solidStar : regularStar } />
-          </button>
-          <button className={ styles.UserEdit } onClick={ () => setEditMode(true) } disabled={ editMode }>
-            <FontAwesomeIcon icon={ faUserEdit } />
-          </button>
-          <button className={ styles.UserDelete } onClick={ () => deleteUser(id) }>
-            <FontAwesomeIcon icon={ faTrash } />
-          </button>
-        </div>
-
-        { avatar
-          && <div className={ styles.UserAvatar }>
-            <LazyLoadImage src={ avatar } alt="avatar" effect="blur" width="128" height="128" />
+          <div className={ styles.Actions }>
+            <button className={ styles.UserFavorite } onClick={ () => toggleFavorite(id) }>
+              <FontAwesomeIcon icon={ favorite ? solidStar : regularStar } />
+            </button>
+            <button className={ styles.UserEdit } onClick={ () => setEditMode(true) } disabled={ editMode }>
+              <FontAwesomeIcon icon={ faUserEdit } />
+            </button>
+            <button className={ styles.UserDelete } onClick={ () => setConfirmPopup(true) }>
+              <FontAwesomeIcon icon={ faTrash } />
+            </button>
           </div>
-        }
 
-        <div className={ styles.UserName }>
-          { editMode 
-            ? <>
-                <input type="text" ref={ firstNameInput } defaultValue={ first_name } autoFocus={ true }  />
-                <input type="text" ref={ lastNameInput } defaultValue={ last_name }  />
-              </>
-            : <> { first_name } { last_name } </>
+          { avatar
+            && <div className={ styles.UserAvatar }>
+              <LazyLoadImage src={ avatar } alt="avatar" effect="blur" width="128" height="128" />
+            </div>
           }
-        </div>
 
-        <div className={ styles.UserEmail }>
-          <Mailto
-            email={ email }
-            headers={
-              { subject:'Question from the Contact Manager App' }
+          <div className={ styles.UserName }>
+            { editMode 
+              ? <>
+                  <input type="text" ref={ firstNameInput } defaultValue={ first_name } autoFocus={ true }  />
+                  <input type="text" ref={ lastNameInput } defaultValue={ last_name }  />
+                </>
+              : <> { first_name } { last_name } </>
             }
-          >{ email }</Mailto>
-        </div>
+          </div>
 
-        <div className={ styles.UserDescription }>
-          { editMode
-            ? <textarea ref={ descriptionInput } defaultValue={ description } rows="5" />
-            : description
+          <div className={ styles.UserEmail }>
+            <Mailto
+              email={ email }
+              headers={
+                { subject:'Question from the Contact Manager App' }
+              }
+            >{ email }</Mailto>
+          </div>
+
+          <div className={ styles.UserDescription }>
+            { editMode
+              ? <textarea ref={ descriptionInput } defaultValue={ description } rows="5" />
+              : description
+            }
+          </div>
+
+          { editMode 
+            && <div className={ styles.EditActions }>
+              <button className={ styles.Save } onClick={ () => handleUpdateUser() }>Save</button>
+              <button className={ styles.Cancel } onClick={ () => setEditMode(false) }>Cancel</button>
+            </div>
           }
         </div>
-
-        { editMode 
-          && <div className={ styles.EditActions }>
-            <button className={ styles.Save } onClick={ () => handleUpdateUser() }>Save</button>
-            <button className={ styles.Cancel } onClick={ () => setEditMode(false) }>Cancel</button>
-          </div>
-        }
       </div>
-    </div>
+    </>
   )
 }
 
