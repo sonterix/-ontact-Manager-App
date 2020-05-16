@@ -21,6 +21,7 @@ const Contacts = ({
 
   useEffect(() => {
     getUsers(pageId)
+    // eslint-disable-next-line
   }, [pageId])
 
   return (

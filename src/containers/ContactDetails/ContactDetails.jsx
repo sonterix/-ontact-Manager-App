@@ -74,8 +74,7 @@ const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, dele
           <Mailto
             email={ email }
             headers={
-              { subject:'Question from the Contact Manager App' },
-              { cc:'friend@mail.my' }
+              { subject:'Question from the Contact Manager App' }
             }
           >{ email }</Mailto>
         </div>
@@ -109,7 +108,7 @@ ContactDetails.defaultProps = {
   users: [],
   toggleFavorite: () => {},
   updatedUser: () => {},
-  deleteUser: () => {},
+  deleteUser: () => {}
 }
 
 export default ContactDetails

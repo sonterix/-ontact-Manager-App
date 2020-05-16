@@ -9,6 +9,7 @@ const App = ({ children, checkUser, loading, alertMessage: { status: alertStatus
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('token')
     checkUser(user, token)
+    // eslint-disable-next-line
   }, [])
 
   return (
