@@ -13,37 +13,55 @@
 
   .Actions {
     display: flex;
+    flex-direction: column;
     position: absolute;
     top: 5px;
-    right: 10px;
+    left: 10px;
 
     > button {
-      margin-right: 5px;
-      padding: 3px;
-      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 5px;
+      width: 30px;
+      height: 30px;
+      color: $color-white;
       border: none;
+      border-radius: 50%;
 
       &.UserFavorite {
         font-size: 18px;
-        color: $color-orange;
+        background-color: $color-orange;
+
+        &:hover {
+          background-color: darken($color-orange, 10);
+        }
       }
 
       &.UserEdit {
-        font-size: 18px;
-        color: $color-blue;
+        font-size: 16px;
+        background-color: $color-blue;
+
+        &:hover {
+          background-color: darken($color-blue, 10);
+        }
       }
   
       &.UserDelete {
         font-size: 16px;
-        color: $color-red;
+        background-color: $color-red;
+
+        &:hover {
+          background-color: darken($color-red, 10);
+        }
       }
 
       &:disabled {
-        color: darken($color-lightgrey, 30);
+        background-color: darken($color-lightgrey, 30);
       }
       
       &:last-child {
-        margin-right: 0;
+        margin-bottom: 0;
       }
     }
   }
