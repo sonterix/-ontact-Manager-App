@@ -38,6 +38,7 @@ const Router = () => (
           <PrivateRoute path={[ '/contacts/:pageId', '/contacts' ]} component={ Contacts } />
           <PrivateRoute path="/contact-details/:userId" component={ ContactDetails } />
           <PrivateRoute path="/contact-create" component={ ContactCreate } />
+          
         </Switch>
       </Suspense>
     </App>

@@ -4,6 +4,7 @@ import User from 'containers/Contacts/User/UserContainer'
 import styles from './Contacts.module.scss'
 import Pagination from 'components/UI/Pagination/Pagination'
 import ContactsActions from 'containers/Contacts/ContactsActions/ContactsActionsContainer'
+import { useHistory } from 'react-router-dom'
 
 const Contacts = ({
   computedMatch = {},
@@ -15,12 +16,17 @@ const Contacts = ({
   clearSelected
 }) => { 
   const { params: { pageId = 1 } } = computedMatch
+  const { push } = useHistory()
   const users = usersPerPage[pageId - 1] || []
 
   useEffect(() => {
     if (!users.length) getUsers()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    if (!users.length && pageId !== 1) push(`/contacts/${ pageId - 1 }`)
+  }, [pageId, push, users.length])
 
   return (
     <div className={ `wrapper-sm ${ styles.UsersWrapper }` }>

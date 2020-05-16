@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { checkForEmptyInputs, getRandomAvatar } from 'helpers.js'
+import { checkForEmptyInputs } from 'helpers.js'
 import styles from './ContactCreate.module.scss'
 import { useHistory } from 'react-router-dom'
 

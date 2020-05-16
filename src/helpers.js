@@ -63,14 +63,15 @@ const checkForEmptyInputs = inputs => {
 
 // Split users for pagination
 const splitUsers = (users, perPage) => {
-  const splitedUsers = []
-  
-  for (let index = 0; index < users.length; index += perPage) {
-    const chunk = users.slice(index, index + perPage)
-    splitedUsers.push(chunk)
+  if (!users) return []
+
+  const firstChunk = users.slice(0, perPage)
+
+  if (!firstChunk.length) {
+    return users
   }
 
-  return splitedUsers
+  return [firstChunk].concat(splitUsers(users.slice(perPage, users.length), perPage))
 }
 
 export {
