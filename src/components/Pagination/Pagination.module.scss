@@ -1,0 +1,21 @@
+@import '../../assets/sass/variables';
+
+.Pagination {
+  margin: 25px auto;
+
+  > a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 3px;
+    color: $color-white; 
+    background-color: $color-dark;
+
+    &:hover {
+      background-color: lighten($color-dark, 10);
+    }
+    
+    &:global(.active) {
+      background-color: $color-orange;
+    }
+  }
+}

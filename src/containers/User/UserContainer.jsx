@@ -8,6 +8,7 @@ const UserContainer = props => {
   const toggleFavorite = id => dispatch(toggleFavoriteAction(id))
   const toggleCheck = id => dispatch(toggleCheckAction(id))
   const deleteUser = id => dispatch(deleteUserAction(id))
+  
   const updatedProps = {
     ...props,
     toggleFavorite,

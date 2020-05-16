@@ -3,17 +3,28 @@ import PropTypes from 'prop-types'
 import { getUsers } from 'helpers.js'
 import User from 'containers/User/UserContainer'
 import styles from './Contacts.module.scss'
+import Pagination from 'components/Pagination/Pagination'
 
-const Contacts = ({ setUsers, users, activePage, totalPages, sortByFavorite, sortByName, sortByChecked, deleteSelected, deleteSelectedButton }) => {
+const Contacts = ({
+  computedMatch = {},
+  setUsers,
+  users,
+  totalPages,
+  sortByFavorite,
+  sortByName,
+  sortByChecked,
+  deleteSelected,
+  deleteSelectedButton
+}) => { 
+  const { params: { pageId = 1 } = {} } = computedMatch
+
   useEffect(() => {
-    if (!users.length) {
-      (async () => {
-        const { data, total_pages } = await getUsers()
-        const users = data.map(user => ({ ...user, favorite: false, checked: false }))
-        setUsers({ users, total_pages })
-      })()
-    }
-  }, [])
+    (async () => {
+      const { data, total_pages } = await getUsers(pageId)
+      const users = data.map(user => ({ ...user, favorite: false, checked: false }))
+      setUsers({ users, total_pages })
+    })()
+  }, [pageId])
 
   return (
     <div className={ `wrapper-sm ${ styles.UsersWrapper }` }>
@@ -40,17 +51,25 @@ const Contacts = ({ setUsers, users, activePage, totalPages, sortByFavorite, sor
         }
       </ul>
 
-      <div className={ styles.Actions }>
-        <button className={ styles.DeleteSelected } onClick={ () => deleteSelected() } disabled={ !deleteSelectedButton }>
-          Delete Selected
-        </button>
-      </div>
+      { users.length
+      && <>
+          <div className={ styles.Actions }>
+            <button className={ styles.DeleteSelected } onClick={ () => deleteSelected() } disabled={ !deleteSelectedButton }>
+              Delete Selected
+            </button>
+          </div>
+
+          <Pagination totalPages={ totalPages } pageId={ +pageId } />
+        </>
+      }
     </div>
   )
 }
 
 Contacts.propTypes = {
-  updatedProps: PropTypes.func,
+  setUsers: PropTypes.func,
+  users: PropTypes.array,
+  totalPages: PropTypes.number,
   sortByFavorite: PropTypes.func,
   sortByName: PropTypes.func,
   sortByChecked: PropTypes.func,
@@ -59,7 +78,9 @@ Contacts.propTypes = {
 }
 
 Contacts.defaultProps = {
-  updatedProps: () => {},
+  setUsers: () => {},
+  users: [],
+  totalPages: 1,
   sortByFavorite: () => {},
   sortByName:  () => {},
   sortByChecked: () => {},

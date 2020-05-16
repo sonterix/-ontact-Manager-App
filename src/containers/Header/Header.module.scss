@@ -7,6 +7,7 @@
   width: 100%;
   min-height: 55px;
   background-color: $color-dark;
+  z-index: 90;
 
   :global(.logo) {
     padding: 5px 0;

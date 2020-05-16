@@ -31,9 +31,9 @@ const Router = () => (
       <Suspense fallback={ <Loading /> }>
         <Switch>
           <Route path="/" component={ Home } exact />
-          <Route path="/login" component={ Login } />
-          <Route path="/logout" component={ Logout } />
-          <PrivateRoute path="/contacts" component={ Contacts }/>
+          <Route path="/login" component={ Login } exact />
+          <Route path="/logout" component={ Logout } exact />
+          <PrivateRoute path="/contacts/:pageId" component={ Contacts } />
           <PrivateRoute path="/contact-details/:userId" component={ () => <h1 className="wrapper">Contact Details</h1> } />
         </Switch>
       </Suspense>
