@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faInfoCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar, faCircle, faCheckCircle } from '@fortawesome/free-regular-svg-icons'
-import ConfirmAlert from 'components/ConfirmAlert/ConfirmAlert'
+import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert'
 import styles from './User.module.scss'
 
 const User = ({ user: { id, first_name, last_name, favorite, checked }, toggleFavorite, toggleCheck, deleteUser }) => {

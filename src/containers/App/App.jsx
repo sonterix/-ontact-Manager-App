@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Header from 'containers/Header/HeaderContainer'
-import Loading from 'components/Loading/Loading'
-import Alert from 'components/Alert/Alert'
+import Loading from 'components/UI/Loading/Loading'
+import Alert from 'components/UI/Alert/Alert'
 
 const App = ({ children, checkUser, loading, alertMessage: { status: alertStatus, message: alertMessage } }) => {
   useEffect(() => {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import User from 'containers/User/UserContainer'
+import User from 'containers/Contacts/User/UserContainer'
 import styles from './Contacts.module.scss'
-import Pagination from 'components/Pagination/Pagination'
+import Pagination from 'components/UI/Pagination/Pagination'
 import ContactsActions from 'components/ContactsActions/ContactsActions'
-import ConfirmAlert from 'components/ConfirmAlert/ConfirmAlert'
+import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert'
 
 const Contacts = ({
   computedMatch = {},

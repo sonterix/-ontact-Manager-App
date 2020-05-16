@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NAV_ITEMS } from 'helpers.js'
-import Logo from 'components/Logo/Logo'
+import Logo from 'components/UI/Logo/Logo'
 import HeaderLink from 'components/HeaderLink/HeaderLink'
 import styles from './Header.module.scss'
 

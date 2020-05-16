@@ -6,7 +6,7 @@ import Mailto from 'react-protected-mailto'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons'
-import ConfirmAlert from 'components/ConfirmAlert/ConfirmAlert';
+import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert';
 import styles from './ContactDetails.module.scss'
 
 const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, deleteUser }) => {
