@@ -35,10 +35,10 @@ const Contacts = ({
           ? <>
               <li className={ styles.Placeholder }>
                 <div className={ styles.FavoritePlaceholder }>
-                  <button onClick={ () => sortByFavorite(pageId - 1) }>Fav</button>
+                  <button onClick={ () => sortByFavorite() }>Fav</button>
                 </div>
                 <div className={ styles.NamePlaceholder }>
-                  <button onClick={ () => sortByName(pageId - 1) }>Name</button>
+                  <button onClick={ () => sortByName() }>Name</button>
                 </div>
                 <div className={ styles.SelectPlaceholder }>
                   <button onClick={ () => sortByChecked(pageId - 1) }>Select</button>

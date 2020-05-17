@@ -16,8 +16,8 @@ const ContactsContainer = props => {
   const dispatch = useDispatch()
   const getUsers = page => dispatch(getUsersAction(page))
   const setUsers = users => dispatch(setUsersAction(users))
-  const sortByFavorite = pageId => dispatch(sortByFavoriteAction(pageId))
-  const sortByName = pageId => dispatch(sortByNameAction(pageId))
+  const sortByFavorite = () => dispatch(sortByFavoriteAction())
+  const sortByName = () => dispatch(sortByNameAction())
   const sortByChecked = pageId => dispatch(sortByCheckedAction(pageId))
   const clearSelected = () => dispatch(clearSelectedAction())
   

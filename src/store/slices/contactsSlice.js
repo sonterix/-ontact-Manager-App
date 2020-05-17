@@ -47,29 +47,30 @@ const contactsSlice = createSlice({
       state.buttons.deleteSelectedButton = state.users.some(user => user.checked)
       state.usersPerPage = splitUsers(state.users, state.perPage)
     },
-    sortByFavorite: (state, { payload }) => {
-      const currentPage = state.usersPerPage[payload]
-      const favorites = currentPage.some(user => user.favorite)
+    sortByFavorite: (state) => {
+      const favorites = state.users.some(user => user.favorite)
 
       if (favorites) {
         if (state.sorted.byFavorite) {
-          state.usersPerPage[payload] = currentPage.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive > bFavorive ? 1 : -1)
+          state.users = state.users.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive > bFavorive ? 1 : -1)
           state.sorted.byFavorite = !state.sorted.byFavorite
+          state.usersPerPage = splitUsers(state.users, state.perPage)
         } else {
-          state.usersPerPage[payload] = currentPage.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive < bFavorive ? 1 : -1)
+          state.users = state.users.sort(({ favorite: aFavorive }, { favorite: bFavorive }) => aFavorive < bFavorive ? 1 : -1)
           state.sorted.byFavorite = !state.sorted.byFavorite
+          state.usersPerPage = splitUsers(state.users, state.perPage)
         }
       }
     },
     sortByName: (state, { payload }) => {
-      const currentPage = state.usersPerPage[payload]
-
       if (state.sorted.byName) {
-        state.usersPerPage[payload] = currentPage.sort(({ first_name: aName }, { first_name: bName }) => aName < bName ? 1 : -1)
+        state.users = state.users.sort(({ first_name: aName }, { first_name: bName }) => aName < bName ? 1 : -1)
         state.sorted.byName = !state.sorted.byName
+        state.usersPerPage = splitUsers(state.users, state.perPage)
       } else {
-        state.usersPerPage[payload] = currentPage.sort(({ first_name: aName }, { first_name: bName }) => aName > bName ? 1 : -1)
+        state.users = state.users.sort(({ first_name: aName }, { first_name: bName }) => aName > bName ? 1 : -1)
         state.sorted.byName = !state.sorted.byName
+        state.usersPerPage = splitUsers(state.users, state.perPage)
       }
     },
     sortByChecked: (state, { payload }) => {
