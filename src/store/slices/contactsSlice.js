@@ -100,6 +100,7 @@ const contactsSlice = createSlice({
     deleteSelected: state => {
       state.users = state.users.filter(user => user.checked === false)
       state.usersPerPage = splitUsers(state.users, state.perPage)
+      state.buttons.deleteSelectedButton = false
     }
   }
 })

@@ -3,19 +3,26 @@ import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import styles from './ConfirmAlert.module.scss'
 
-const ConfirmAlert = ({ message, submitBtn, cancelBtn, submitFunc, cancelFunc }) => createPortal(
-  <div className={ styles.ConfirmAlertWrapper }>
-    <div className={ styles.ConfirmAlertOverlay } onClick={ () => cancelFunc() }></div>
-      <div className={ styles.ConfirmAlertPopup }>
-        <div className={ styles.Message }>{ message }</div>
-        <div className={ styles.Actions }>
-          <button className={ styles.Submit } onClick={ () => { submitFunc(); cancelFunc()} }>{ submitBtn }</button>
-          <button className={ styles.Cancel } onClick={ () => cancelFunc() }>{ cancelBtn }</button>
+const ConfirmAlert = ({ message, submitBtn, cancelBtn, submitFunc, cancelFunc }) => {
+  const handleActionAndClose = () => {
+    submitFunc()
+    cancelFunc()
+  }
+
+  return createPortal(
+    <div className={ styles.ConfirmAlertWrapper }>
+      <div className={ styles.ConfirmAlertOverlay } onClick={ () => cancelFunc() }></div>
+        <div className={ styles.ConfirmAlertPopup }>
+          <div className={ styles.Message }>{ message }</div>
+          <div className={ styles.Actions }>
+            <button className={ styles.Submit } onClick={ () => handleActionAndClose() }>{ submitBtn }</button>
+            <button className={ styles.Cancel } onClick={ () => cancelFunc() }>{ cancelBtn }</button>
+          </div>
         </div>
-      </div>
-    </div>,
-  document.body
-)
+      </div>,
+    document.body
+  )
+}
 
 ConfirmAlert.propTypes = {
   message: PropTypes.string,

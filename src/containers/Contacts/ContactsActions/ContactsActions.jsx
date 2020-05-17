@@ -26,7 +26,7 @@ const ContactsActions = ({ usersLength, perPage, clearSelected, setPerPage, dele
       { confirmPopup 
         && <ConfirmAlert
           submitBtn="Delete Selected"
-          submitFunc={ () => { deleteSelected(); clearSelected() } }
+          submitFunc={ () => deleteSelected() }
           cancelFunc={ () => setConfirmPopup(false) }
         />
       }
