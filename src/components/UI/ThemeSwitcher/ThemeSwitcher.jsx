@@ -36,10 +36,10 @@ const ThemeSwitcher = () => {
   }
 
   return createPortal(
-    <div className={ styles.Switcher }>
+    <button className={ styles.Switcher }>
       <FontAwesomeIcon className={ styles.Sun } icon={ faSun } onClick={ () => handleSetTheme('sun') } />
       <FontAwesomeIcon className={ styles.Moon } icon={ faMoon } onClick={ () => handleSetTheme('moon') } />
-    </div>,
+    </button>,
     document.body
   )
 }
