@@ -71,9 +71,14 @@
   }
 
   .UserAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     margin-bottom: 15px;
 
     img {
+      position: relative;
       display: inline-block;
       max-width: 128px;
       max-height: 128px;
@@ -81,6 +86,21 @@
       border-radius: 50%;
       object-fit: cover;
       pointer-events: none;
+      z-index: 2;
+    }
+
+    &::before { 
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 127px;
+      height: 127px;
+      background-color: darken($color-lightgrey, 10);
+      border-radius: 50%;
+      z-index: 1;
     }
   }
 
