@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+
+This command installs a package, and any packages that it depends on.<br />
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
@@ -11,11 +15,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -37,32 +36,79 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Deploy Your React App To Heroku
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Requirements:
+* [Node / NPM](https://nodejs.org/)
+* [Git](https://git-scm.com/downloads)
+* [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Step 1 — Sign up For Heroku
+**Visit [Heroku](https://www.heroku.com/) for free hosting**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+This step explains itself, we need to sign up for Heroku before we can do any deployment. So head over to Heroku and sign up. Once you signed up make sure you head over to your email and confirm your account.
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Step 2 — Setup React App
+Open up your React app and open up your package.json file. If your using create-react-app we’re going to add a new object called engines. Inside of our engines object, we need to specify the versions for npm and node. To do this open up your terminal and type in:
 
-### Making a Progressive Web App
+### `npm -v`
+Press enter
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### `node -v`
+Press enter
 
-### Advanced Configuration
+```
+{
+  "name": "contact-manager",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "npm": "6.12.0",
+    "node": "12.13.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-regular-svg-icons": "^5.13.0",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "@reduxjs/toolkit": "^1.3.6",
+    ...
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+  ...
+}
+```
+Your versions may be different than mine, but that's fine. Once you specified your engine versions save your file.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+### Step 3 — Create Heroku Git Repository
+With your terminal still open navigate to your React app folder and change directory into it. Now we need to connect our project to Heroku. If you haven’t already installed the Heroku CLI. To make sure it’s installed correctly run this command:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### `heroku --version`
 
-### `npm run build` fails to minify
+You should see your Heroku CLI version. Once that is installed we need to setup up Heroku git repository by running these commands:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. heroku login (Enter your Heroku credentials)
+1. git init
+1. git add .
+1. git commit -m “initial commit”
+1. heroku create (You should see two links after running this command. Copy the second one)
+1. git remote add heroku PASTE THE LINK YOU JUST COPIED
+1. git push heroku master
+
+Once you run the last command Heroku will start to run some tests on your app. If everything goes right you should see a successful deploy message. Now you’re able to navigate to your app by running:
+
+### `heroku open`
+
+Anytime you make changes to your app and want to re-deploy the only commands you need to run are:
+
+1. git add .
+1. git commit -m “any message goes here”
+1. git push heroku master
