@@ -8,14 +8,13 @@
   align-items: center;
   width: 100%;
   min-height: calc(100vh - 55px);
-  background-color: #80b49e;
 
   > h1 {
     margin-bottom: 50px;
     font-size: 64px;
     font-weight: 600;
     text-align: center;
-    color: $color-white;
+    color: $color-dark;
     cursor: default;
 
     > span {
@@ -43,7 +42,18 @@
   }
 
   img {
-    max-width: 600px;
+    max-width: 500px;
     pointer-events: none;
+  }
+}
+
+:global(.moon) {
+
+  .Homepage {
+    background-color: $color-dark;
+
+    > h1 {
+      color: $color-white;
+    }
   }
 }

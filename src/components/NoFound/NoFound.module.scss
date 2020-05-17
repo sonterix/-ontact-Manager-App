@@ -3,4 +3,21 @@
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 55px);
+
+  .NoFoundImage {
+    max-width: 1024px;
+    width: 100%;
+    min-height: 560px;
+    background-image: url('../../assets/images/404.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+:global(.moon) {
+
+  .NoFoundImage {
+    background-image: url('../../assets/images/404-dark.png');
+  }
 }
