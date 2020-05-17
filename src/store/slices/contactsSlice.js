@@ -43,11 +43,12 @@ const contactsSlice = createSlice({
       state.usersPerPage = splitUsers(state.users, state.perPage)
     },
     toggleCheck: (state, { payload }) => {
+      state.users = state.usersPerPage.reduce((accumulator, chunk) =>  [ ...accumulator, ...chunk ], [])
       state.users = state.users.map(user => user.id === payload ? { ...user, checked: !user.checked } : user)
       state.buttons.deleteSelectedButton = state.users.some(user => user.checked)
       state.usersPerPage = splitUsers(state.users, state.perPage)
     },
-    sortByFavorite: (state) => {
+    sortByFavorite: state => {
       const favorites = state.users.some(user => user.favorite)
 
       if (favorites) {
@@ -62,7 +63,7 @@ const contactsSlice = createSlice({
         }
       }
     },
-    sortByName: (state, { payload }) => {
+    sortByName: state => {
       if (state.sorted.byName) {
         state.users = state.users.sort(({ first_name: aName }, { first_name: bName }) => aName < bName ? 1 : -1)
         state.sorted.byName = !state.sorted.byName
