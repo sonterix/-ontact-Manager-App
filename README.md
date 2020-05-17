@@ -1,8 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+#### This project was created with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## Available Scripts
-
-In the project directory, you can run:
+## Scripts
 
 ### `npm install`
 
@@ -13,17 +11,12 @@ This command installs a package, and any packages that it depends on.<br />
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
@@ -44,13 +37,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 * [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 
 
-### Step 1 — Sign up For Heroku
+### Step 1: Sign up For Heroku
 **Visit [Heroku](https://www.heroku.com/) for free hosting**
 
 This step explains itself, we need to sign up for Heroku before we can do any deployment. So head over to Heroku and sign up. Once you signed up make sure you head over to your email and confirm your account.
 
 
-### Step 2 — Setup React App
+### Step 2: Setup React App
 Open up your React app and open up your package.json file. If your using create-react-app we’re going to add a new object called engines. Inside of our engines object, we need to specify the versions for npm and node. To do this open up your terminal and type in:
 
 ### `npm -v`
@@ -88,7 +81,7 @@ Press enter
 Your versions may be different than mine, but that's fine. Once you specified your engine versions save your file.
 
 
-### Step 3 — Create Heroku Git Repository
+### Step 3: Create Heroku Git Repository
 With your terminal still open navigate to your React app folder and change directory into it. Now we need to connect our project to Heroku. If you haven’t already installed the Heroku CLI. To make sure it’s installed correctly run this command:
 
 ### `heroku --version`
