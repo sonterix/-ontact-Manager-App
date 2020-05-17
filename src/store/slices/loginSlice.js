@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { loadingOnAction, loadingOffAction } from "./appSlice";
+import { createSlice } from "@reduxjs/toolkit"
+import { loadingOnAction, loadingOffAction } from "./appSlice"
 
 const initialState = {
   user: '',

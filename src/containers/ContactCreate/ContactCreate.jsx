@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { checkForEmptyInputs } from 'helpers.js'
-import styles from './ContactCreate.module.scss'
 import { useHistory } from 'react-router-dom'
+import { checkForEmptyInputs, RANDOM_AVATAR_URL } from 'helpers.js'
+import styles from './ContactCreate.module.scss'
 
-const ContactCreate = ({ putUser }) => {
+const ContactCreate = ({ setAlert, unsetAlert, users, putUser }) => {
   const initialState = {
     email: '',
     first_name: '',
@@ -18,7 +18,6 @@ const ContactCreate = ({ putUser }) => {
   const firstNameInput = useRef()
   const lastNameInput = useRef()
   const emailInput = useRef()
-  const descriptionInput = useRef()
 
   const { push } = useHistory()
 
@@ -27,17 +26,31 @@ const ContactCreate = ({ putUser }) => {
   const handleSubmitForm = async event => {
     event.preventDefault()
 
-    // just base validation to not spend so much time
+    // just base validation to not spend to much time
     const inputErrors = checkForEmptyInputs([ 
       firstNameInput.current,
       lastNameInput.current,
-      emailInput.current,
-      descriptionInput.current
+      emailInput.current
     ])
 
-    if (!inputErrors) {
+    const isEmailExists = users.some(({ email: userEmail }) => userEmail === email)
+
+    if (isEmailExists) {
+      setAlert('Email is already exists')
+
+      setTimeout(() => {
+        unsetAlert()
+      }, 4000);
+    }
+
+    if (!inputErrors && !isEmailExists) {
       // Reset avatar due to we cant' show images from a local machine
-      putUser({ ...user, avatar: '' })
+      if (avatar.length) {
+        putUser({ ...user, avatar: `${ RANDOM_AVATAR_URL }${ (Math.random() * 500).toFixed(0) }` })
+      } else {
+        putUser(user)
+      }
+
       setUser(initialState)
       push('/contacts')
     }
@@ -50,7 +63,7 @@ const ContactCreate = ({ putUser }) => {
         <input type="text" name="first_name" placeholder="First Name" ref={ firstNameInput } value={ first_name } onChange={ event => handleInputData(event) } autoFocus={ true} />
         <input type="text" name="last_name" placeholder="Last Name" ref={ lastNameInput } value={ last_name } onChange={ event => handleInputData(event) } />
         <input type="email" name="email" placeholder="Email" ref={ emailInput } value={ email } onChange={ event => handleInputData(event) } />
-        <textarea name="description" placeholder="Description" ref={ descriptionInput } rows={ 5 } value={ description } onChange={ event => handleInputData(event) } />
+        <textarea name="description" placeholder="Description" rows={ 5 } value={ description } onChange={ event => handleInputData(event) } />
         <input type="file" name="avatar" value={ avatar } accept="image/*" onChange={ event => handleInputData(event) } />
         <div className={ styles.CreateFormAction }>
           <button type="submit" className={ styles.Submit }>Create</button>
@@ -62,10 +75,16 @@ const ContactCreate = ({ putUser }) => {
 }
 
 ContactCreate.propTypes = {
+  setAlert: PropTypes.func,
+  unsetAlert: PropTypes.func,
+  users: PropTypes.array,
   putUser: PropTypes.func
 }
 
 ContactCreate.defaultProps = {
+  setAlert: () => {},
+  unsetAlert: () => {},
+  users: [],
   putUser: () => {}
 }
 

@@ -9,9 +9,11 @@ import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert'
 const ContactsActions = ({ usersLength, perPage, clearSelected, setPerPage, deleteSelected, deleteSelectedButton }) => {
   const [ confirmPopup, setConfirmPopup ] = useState(false)
   const { push } = useHistory()
-  const perPageVariants = []
 
-  for (let pageNumber = usersLength; pageNumber > 3; pageNumber -= 2) {
+  const perPageVariants = []
+  const pageNumberLength = usersLength % 2 ? usersLength - 1 : usersLength
+
+  for (let pageNumber = pageNumberLength; pageNumber >= 4; pageNumber -= 2) {
     perPageVariants.unshift(pageNumber)
   }
 
@@ -34,7 +36,7 @@ const ContactsActions = ({ usersLength, perPage, clearSelected, setPerPage, dele
         <div className={ styles.ActionsLeft }>
           <div className={ styles.PerPage }>
             <select onChange={ event => handleSwitchPerPage(event) } value={ perPage }>
-              { perPageVariants.map(variant => <option key={ variant } value={ variant }>{ variant }</option>) }
+              { perPageVariants.slice(0, 8).map(variant => <option key={ variant } value={ variant }>{ variant }</option>) }
             </select>
           </div>
         </div>

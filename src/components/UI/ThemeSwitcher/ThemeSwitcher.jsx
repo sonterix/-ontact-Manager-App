@@ -22,16 +22,16 @@ const ThemeSwitcher = () => {
         document.body.classList.remove('moon')
         document.body.classList.add('sun')
         localStorage.setItem('theme', 'sun')
-        break;
+        break
       
       case 'moon':
         document.body.classList.remove('sun')
         document.body.classList.add('moon')
         localStorage.setItem('theme', 'moon')
-        break;
+        break
 
       default:
-        break;
+        break
     }
   }
 

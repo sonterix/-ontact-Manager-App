@@ -4,6 +4,8 @@ const API_LOGIN = 'api/login'
 const API_USERS = 'api/users'
 const API_PAGE = '?per_page=9999'
 
+const RANDOM_AVATAR_URL = 'https://api.adorable.io/avatars/128/'
+
 // Nav
 const NAV_ITEMS = {
   userLogin: [
@@ -92,6 +94,7 @@ export {
   API_USERS,
   API_PAGE,
   NAV_ITEMS,
+  RANDOM_AVATAR_URL,
   auth,
   setLoginLS,
   setLogoutLS,

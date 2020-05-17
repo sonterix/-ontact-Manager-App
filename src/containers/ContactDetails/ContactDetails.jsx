@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Mailto from 'react-protected-mailto'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar as solidStar, faTrash, faUserEdit } from '@fortawesome/free-solid-svg-icons'
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons'
-import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert';
+import ConfirmAlert from 'components/UI/ConfirmAlert/ConfirmAlert'
 import noavatar from 'assets/images/noavatar.png'
 import styles from './ContactDetails.module.scss'
 
@@ -70,8 +69,8 @@ const ContactDetails = ({ computedMatch, users, toggleFavorite, updateUser, dele
           
           <div className={ styles.UserAvatar }>
             { avatar
-              ? <LazyLoadImage src={ avatar } alt="avatar" effect="blur" width="128" height="128" />
-              : <LazyLoadImage src={ noavatar } alt="avatar" effect="blur" width="128" height="128" />
+              ? <img src={ avatar } alt="avatar" />
+              : <img src={ noavatar } alt="avatar" />
             }
           </div>
 

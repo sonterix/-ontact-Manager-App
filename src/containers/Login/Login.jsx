@@ -26,7 +26,7 @@ const Login = ({ isLogged, loginUser, loadingOn, loadingOff, setAlert, unsetAler
   const handleSubmitForm = async event => {
     event.preventDefault()
 
-    // just base validation to not spend so much time
+    // just base validation to not spend to much time
     const inputErrors = checkForEmptyInputs([ emailInput.current, passwordInput.current ])
 
     if (!inputErrors) {
