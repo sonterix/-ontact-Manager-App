@@ -66,16 +66,31 @@
   }
 
   > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 5px;
-    padding: 10px 5px;
+    padding: 5px;
+    min-height: 44px;
     text-align: center;
     color: $color-dark;
     background-color: $color-white;
     border-left: 1px solid $color-white;
     cursor: default;
 
-    &:last-child {
-      border-radius: 1px solid $color-white;
+    &:first-child {
+      border-left: none;
+    }
+  }
+}
+
+:global(.moon) {
+  
+  .User > div {
+    color: $color-black;
+
+    &.Select > button > svg {
+      color: $color-black;
     }
   }
 }

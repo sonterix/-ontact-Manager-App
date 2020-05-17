@@ -48,4 +48,8 @@ body {
     display: inline-block;
     line-height: 0;
   }
+
+  &.moon {
+    background-color: $color-dark;
+  }
 }

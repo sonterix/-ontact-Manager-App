@@ -1,0 +1,45 @@
+@import '../../../assets/sass/variables';
+
+.Switcher {
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  width: 50px;
+  height: 65px;
+  padding-bottom: 15px;
+  font-size: 44px;
+  overflow: hidden;
+  z-index: 90;
+
+  .Sun,
+  .Moon {
+    position: absolute;
+    top: calc(50% - 7.5px);
+    left: 50%;
+    transform: translateX(-50%) translateY(200%);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .Sun {
+    color: $color-white;
+  }
+
+  .Moon {
+    color: $color-dark;
+  }
+}
+
+:global(.sun) {
+  
+  .Moon {
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+:global(.moon) {
+  
+  .Sun {
+    transform: translateX(-50%) translateY(-50%);
+  }
+}

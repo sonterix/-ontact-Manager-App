@@ -84,8 +84,8 @@
         border-left: 1px solid $color-white;
         cursor: default;
   
-        &:last-child {
-          border-radius: 1px solid $color-white;
+        &:first-child {
+          border-left: none;
         }
 
         @media (max-width: $sm) {
@@ -102,5 +102,12 @@
       color: darken($color-lightgrey, 30);
       cursor: default;
     }
+  }
+}
+
+:global(.moon) {
+  
+  .Placeholder > div {
+    background-color: $color-black !important;
   }
 }

@@ -65,7 +65,6 @@
   }
 
   > button {
-    max-width: 150px;
     width: 100%;
     padding: 10px;
     color: $color-white;
@@ -74,8 +73,18 @@
     font-size: 16px;
     transition: background-color $trans-md;
 
-    &:hover,
-    &:focus {
+    &:hover {
+      background-color: $color-orange;
+    }
+  }
+}
+
+:global(.moon) {
+
+  .LoginForm > button {
+    background-color: $color-black;
+
+    &:hover {
       background-color: $color-orange;
     }
   }

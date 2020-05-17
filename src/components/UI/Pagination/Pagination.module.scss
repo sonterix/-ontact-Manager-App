@@ -20,3 +20,18 @@
     }
   }
 }
+
+:global(.moon) {
+
+  .Pagination > button {
+    background-color: $color-black;
+
+    &:hover {
+      background-color: lighten($color-black, 5);
+    }
+
+    &:global(.active) {
+      background-color: $color-orange;
+    }
+  }
+}

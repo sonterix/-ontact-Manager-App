@@ -79,3 +79,29 @@
     }
   }
 }
+
+:global(.moon) {
+
+  .CreateForm > input[type=file] {
+    color: $color-white;
+  }
+  
+  .CreateFormAction > button {
+
+    &.Submit {
+      background-color: $color-green;
+  
+      &:hover {
+        background-color: darken($color-green, 15);
+      }
+    }
+
+    &.Cancel {
+      background-color: $color-red;
+
+      &:hover {
+        background-color: darken($color-red, 15);
+      }
+    }
+  }
+}

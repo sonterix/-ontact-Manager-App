@@ -42,6 +42,14 @@
         font-size: 15px;
         background-color: $color-blue;
 
+        &:disabled {
+          background-color: darken($color-lightgrey, 30);
+
+          &:hover {
+            background-color: darken($color-lightgrey, 30);
+          }
+        }
+
         &:hover {
           background-color: darken($color-blue, 10);
         }
@@ -54,10 +62,6 @@
         &:hover {
           background-color: darken($color-red, 10);
         }
-      }
-
-      &:disabled {
-        background-color: darken($color-lightgrey, 30);
       }
       
       &:last-child {
@@ -174,6 +178,17 @@
           background-color: darken($color-lightgrey, 40);
         }
       }
+    }
+  }
+}
+
+:global(.moon) {
+  
+  .UserCard {
+    background-color: $color-lightgrey;
+
+    > div {
+      color: $color-black;
     }
   }
 }

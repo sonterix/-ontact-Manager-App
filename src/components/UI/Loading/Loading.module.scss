@@ -25,3 +25,10 @@
     cursor: default;
   }
 }
+
+:global(.moon) {
+
+  .LoadingText {
+    background-color: $color-black;
+  }
+}

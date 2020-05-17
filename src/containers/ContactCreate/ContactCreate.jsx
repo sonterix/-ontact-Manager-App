@@ -54,7 +54,7 @@ const ContactCreate = ({ putUser }) => {
         <input type="file" name="avatar" value={ avatar } accept="image/*" onChange={ event => handleInputData(event) } />
         <div className={ styles.CreateFormAction }>
           <button type="submit" className={ styles.Submit }>Create</button>
-          <button type="button" className={ styles.Cancel }>Cancel</button>
+          <button type="button" className={ styles.Cancel } onClick={ () => push('/contacts') }>Cancel</button>
         </div>
       </form>
     </div>
