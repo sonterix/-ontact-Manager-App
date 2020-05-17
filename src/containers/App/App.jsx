@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { loadBody } from 'helpers'
 import Header from 'containers/Header/HeaderContainer'
 import Loading from 'components/UI/Loading/Loading'
 import Alert from 'components/UI/Alert/Alert'
@@ -7,9 +8,12 @@ import ThemeSwitcher from 'components/UI/ThemeSwitcher/ThemeSwitcher'
 
 const App = ({ children, checkUser, loading, alertMessage: { status: alertStatus, message: alertMessage } }) => {
   useEffect(() => {
-    const user = localStorage.getItem('user')
-    const token = localStorage.getItem('token')
-    checkUser(user, token)
+    (async () => {
+      const user = localStorage.getItem('user')
+      const token = localStorage.getItem('token')
+      await checkUser(user, token)
+      loadBody()
+    })()
     // eslint-disable-next-line
   }, [])
 

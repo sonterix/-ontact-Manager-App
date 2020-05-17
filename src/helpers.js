@@ -45,6 +45,18 @@ const setLogoutLS = () => {
   localStorage.removeItem('user')
 }
 
+const loadBody = (load = true) => {
+  if (load) {
+    setTimeout(() => {
+      document.body.style.opacity = 1
+    }, 1)
+  } else {
+    setTimeout(() => {
+      document.body.style.opacity = 0
+    }, 1)
+  }
+}
+
 // Checks (works with ref)
 const checkForEmptyInputs = inputs => {
   let error = false
@@ -83,6 +95,7 @@ export {
   auth,
   setLoginLS,
   setLogoutLS,
+  loadBody,
   splitUsers,
   checkForEmptyInputs
 }

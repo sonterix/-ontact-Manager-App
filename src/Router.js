@@ -14,6 +14,7 @@ const NoFound = lazy(() => import('components/NoFound/NoFound'))
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const isLogged = useSelector(({ login: { isLogged } }) => isLogged)
+  
   return (
     <Route { ...props } render={({ location }) =>
         isLogged
